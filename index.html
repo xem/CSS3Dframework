@@ -1,35 +1,52 @@
 ﻿<!-- Tuto -->
-<div style="float:right; width:calc(100vw - 650px)">
+<div style="float:right; width:calc(100vw - 650px); height: 98vh; overflow: auto;">
 <h2>CSS3Dframework</h2>
-<p><b>Introduction</b>
+<p><b>• Introduction</b>
 <p>This mini-framework is made for creating and interacting with CSS3D scenes very easily.
-<p>The black rectangle is the viewport. Everything is displayed inside it.
+<p>The black rectangle is the viewport. Everything is displayed inside it (you can make it fullscreen if you want).
 <p>The red dot is the virtual camera. All the scene will move relatively to to this dot to simulate camera movement.
 <p>The camera and the items have a default 0.5s transition when moving / rotating.
-<p>The sizes are in px and the angles are in degrees.
+<p>The transform-origin of every CSS3D item is placed at their center.
 <br>
 <br>
-<p><b>API</b>
-<p>All params are optional. n: name, w: width, h: height, d: depth, b: background, x/y/z: position, rx/ry/rz: rotation, html: custom innerHTML, css: CSS class.
-<pre><code class="lang-js">plane({n,w,h,b,x,y,z,rx,ry,rz,html,css})  // create a plane
-sprite({n,w,h,b,x,y,z,rx,ry,rz,html,css}) // create a sprite (always facing the camera)
-cube({n,w,h,d,b,x,y,z,rx,ry,rz,css})      // create a cube
-camera({x,y,z,rx,ry,rz})                  // move and/or rotate the camera
-move({n,x,y,z,rx,ry,rz})                  // move and/or rotate a scene item
-remove(n)                                 // remove an item from the scene
-perspective(p)                            // set perspective distance</code></pre>
+<p><b>• API</b>
+<p>All params are optional. n: name, w/h/d: width/height/depth, b: background, x/y/z: position, rx/ry/rz: rotation, html: innerHTML, css: CSS class.
+<pre><code class="lang-js">unit(u)                                     // set size unit (default "px". Use "vmin" for responsiveness)
+plane({n,w,h,b,x,y,z,rx,ry,rz,html,css})    // create a plane
+triangle({n,w,h,b,x,y,z,rx,ry,rz,html,css}) // create an equilateral triangle
+sprite({n,w,h,b,x,y,z,rx,ry,rz,html,css})   // create a sprite (a plane always facing the camera)
+cube({n,w,h,d,b,x,y,z,rx,ry,rz,css})        // create a cube
+pyramid({n,w,h,d,b,x,y,z,rx,ry,rz,css})     // create a square-based pyramid
+camera({x,y,z,rx,ry,rz})                    // move and/or rotate the camera
+move({n,x,y,z,rx,ry,rz})                    // move and/or rotate a scene item
+remove(n)                                   // remove an item from the scene
+perspective(p)                              // set perspective distance</code></pre>
 <br>
-<p><b>Demo</b>
+<p><b>• Demo</b>
 <p>Here's a list of things you can do with this framework (click the buttons to test each snippet):
 <p>- Add a green plane called "ground" in the scene: <button>plane({n:"ground",x:0,y:0,z:0,w:500,h:500,b:"#8D8"})</button>
 <p>- Move the camera at its center: <button>camera({x:250,y:250,z:250})</button>
 <p>- Rotate the camera: <button>camera({rx:80,ry:10,rz:20})</button> <button>camera({rx:45,ry:0,rz:0})</button>
 <p>- Change the perspective value: <button>perspective(200)</button> <button>perspective(500)</button> <button>perspective(900)</button>
+<p>- Add a vertical triangle called "t1": <button>//triangle({n:"t1",w:100,h:100,x:50,y:50,z:50,rx:90,b:"#def"})</button>
 <p>- Add a vertical plane called "p1": <button>plane({n:"p1",w:100,h:100,x:50,y:50,z:50,rx:90,b:"#def"})</button>
 <p>- Add a sprite called "s1": <button>// sprite({n:"s1",w:100,h:100,x:250,y:50,z:50,rx:90,b:"#fed"})</button>
 <p>- Add a cube called "c1": <button>// cube({n:"c1",w:100,h:100,x:450,y:50,z:50,rx:90,b:"#edf"})</button>
-<p>- Move the shapes ...
-<p>- Move the camera ...
+<p>- Add a pyramid called "p1": <button>// pyramid({n:"p1",w:100,h:100,x:450,y:50,z:50,rx:90,b:"#edf"})</button>
+<p>- Move the shapes around ...
+<p>- Move the camera around ...
+<p>- Remove items ...
+<br>
+<br>
+<p><b>• Download</b>
+<p>HTML:
+<pre><code class="lang-html">&lt;div id=viewport>
+  &lt;div id=camera>
+    &lt;div id=scene>&lt;/div>
+  &lt;/div>
+&lt;/div></code></pre>
+<p>CSS:
+<p>JS:
 </div>
 
 <!-- HTML/CSS -->
@@ -47,7 +64,7 @@ perspective(p)                            // set perspective distance</code></pr
 
 <!-- JS -->
 <script>
-
+unit = "px";
 camX = camY = camZ = 0;
 camRX = camRY = camRZ = 0;
 
@@ -58,7 +75,7 @@ plane = o => {
   o.rx|=0;
   o.ry|=0;
   o.rz|=0;
-  scene.innerHTML += `<div id=${o.n} style="position:fixed;width:${o.w};height:${o.h};background:${o.b};transform:translateX(${o.x}px)translateY(${o.y}px)translateZ(${o.z}px)rotateX(${o.rx}deg)rotateY(${o.ry}deg)rotateZ(${o.rz}deg)">`;
+  scene.innerHTML += `<div id=${o.n} style="position:fixed;width:${o.w}${unit};height:${o.h}${unit};background:${o.b};transform:translateX(${o.x}${unit})translateY(${o.y}${unit})translateZ(${o.z}${unit})rotateX(${o.rx}deg)rotateY(${o.ry}deg)rotateZ(${o.rz}deg)">`;
   
   // Firefox fix
   camZ += .0001;
@@ -72,8 +89,8 @@ camera = o => {
   if(o && (o.rx || o.rx === 0)) camRX = o.rx;
   if(o && (o.ry || o.ry === 0)) camRY = o.ry;
   if(o && (o.rz || o.rz === 0)) camRZ = o.rz;
-  scene.style.transformOrigin = `${camX}px ${camY}px`;
-  scene.style.transform = `translateX(${-camX}px)translateY(${-camY}px)translateZ(${-camZ}px)rotateX(${camRX}deg)rotateY(${camRY}deg)rotateZ(${camRZ}deg)`;
+  scene.style.transformOrigin = `${camX}${unit} ${camY}${unit}`;
+  scene.style.transform = `translateX(${-camX}${unit})translateY(${-camY}${unit})translateZ(${-camZ}${unit})rotateX(${camRX}deg)rotateY(${camRY}deg)rotateZ(${camRZ}deg)`;
 }
 
 perspective = o => {
