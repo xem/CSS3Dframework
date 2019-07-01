@@ -1,18 +1,16 @@
 ﻿<!-- Tuto -->
-<div style="float:right; width:calc(100vw - 650px); height: 98vh; overflow: auto;">
+<div style="float:right; width:calc(100vw - 530px); height: calc(100vh - 20px); overflow: auto;">
 <h2>CSS3Dframework</h2>
 <p><b>• Introduction</b>
 <p>This mini-framework is made for creating and interacting with CSS3D scenes very easily.
 <p>The black square on the left is the viewport. Everything is displayed inside it (you can make it fullscreen if you want).
 <p>The red dot is the virtual camera. All the scene will move relatively to to this dot to simulate camera movement.
 <p>The camera and the scene's items have a default 0.5s transition when moving / rotating.
-<p>The transform-origin of every CSS3D item is placed at their center.
 <br>
 <br>
 <p><b>• API</b>
 <p>All the parameters are optional.
 <p>Legend: n: name, g: group, w/h/d: width/height/depth, b: background, x/y/z: position, rx/ry/rz: rotation, html: innerHTML, css: CSS class.
-<p>Planes and sprites can use the built-in CSS classes "triangle" and "circle".
 <pre><code class="lang-js">unit(u)                                       // set size unit (default "px". Use "vmin" for responsiveness)
 group({n,w,h,x,y,z,rx,ry,rz})                 // create a group of scene items
 plane({n,g,w,h,b,x,y,z,rx,ry,rz,html,css})    // create a plane
@@ -24,20 +22,31 @@ move({n,x,y,z,rx,ry,rz})                      // move and/or rotate a scene item
 remove(n)                                     // remove an item or group from the scene
 perspective(p)                                // set perspective distance</code></pre>
 <br>
+<p><b>• CSS shapes</b>
+<p>Planes and sprites are rectangle by default but can use these built-in CSS classes: <pre><code class="lang-css">.circle                 // ⬤
+.triangle               // ▲
+.triangle-bottom        // ▼
+.triangle-left          // ◄
+.triangle-right         // ►
+.triangle-top-left      // ◤
+.triangle-top-right     // ◥
+.triangle-bottom-left   // ◣
+.triangle-bottom-right  // ◢</code></pre>
+<br>
 <p><b>• Demo</b>
 <p>Here's a list of things you can do with this framework (click the buttons to test each snippet):
 <p>- Add a green plane called "ground" in the scene: <button>plane({n:"ground",x:0,y:0,z:0,w:500,h:500,b:"#8D8"})</button>
 <p>- Move the camera at its center: <button>camera({x:250,y:250,z:250})</button>
-<p>- Rotate the camera: <button>camera({rx:80,ry:10,rz:20})</button> <button>camera({rx:45,ry:0,rz:0})</button>
+<p>- Rotate the camera: <button>camera({rx:45,ry:0,rz:0})</button> <button>camera({rx:45,ry:0,rz:85})</button>
 <p>- Change the perspective value: <button>perspective(200)</button> <button>perspective(500)</button> <button>perspective(900)</button>
 <p>- Add a group called "g1": <button>group({n:"g1",x:50,y:50,w:400,h:100})</button>
 <p>- Add a vertical plane called "p1" in the group: <button>plane({n:"p1",g:"g1",w:100,h:100,x:0,y:0,z:50,rx:-90,b:"#def"})</button>
-<p>- Add a vertical triangle plane called "t1" in the group: <button>plane({n:"t1",g:"g1",w:100,h:100,x:100,y:0,z:50,rx:-90,b:"#edf",css:"triangle"})</button>
-<p>- Add a sprite called "s1" in the group: <button> sprite({n:"s1",g:"g1",w:100,h:100,x:250,y:50,z:50,rx:-90,b:"#fed"})</button>
-<p>- Add a circle sprite called "c1" in the group: <button> sprite({n:"s1",g:"g1",w:100,h:100,x:250,y:50,z:50,rx:-90,b:"#efd",css:"circle"})</button>
-
-<p>- Add a cube called "c1": <button>// cube({n:"c1",w:100,h:100,x:450,y:50,z:50,rx:-90,b:"#fde"})</button>
-<p>- Add a pyramid called "py1 in the group": <button>// pyramid({n:"p1",w:100,h:100,x:450,y:50,z:50,rx:-90,b:"#dfe"})</button>
+<p>- Add a vertical triangle plane called "t1" in the group: <button>plane({n:"t1",g:"g1",w:100,h:100,x:100,y:0,z:50,rx:-90,b:"#edf",css:"triangle"}))</button>
+<p>- Add a sprite called "s1" in the group: <button> sprite({n:"s1",g:"g1",w:100,h:200,x:200,y:0,z:100,b:"#fed"})</button>
+<p>- Add a circle sprite called "c1" in the group: <button> sprite({n:"s2",g:"g1",w:100,h:100,x:300,y:0,z:50,b:"#efd",css:"circle"})</button>
+<p>- Rotate the camera again to see the sprites facing it <button>camera({rx:50,ry:0,rz:-85})</button> <button>camera({rx:60,ry:0,rz:0})</button>
+<p>- Add a cube called "c1": <button>cube({n:"c1",w:100,h:100,x:450,y:50,z:50,rx:-90,b:"#fde"})</button>
+<p>- Add a pyramid called "py1 in the group": <button>pyramid({n:"p1",w:100,h:100,x:450,y:50,z:50,rx:-90,b:"#dfe"})</button>
 <p>- Move a shape around ...
 <p>- Move a group around ...
 <p>- Move the camera around ...
@@ -62,13 +71,21 @@ perspective(p)                                // set perspective distance</code>
   </div>
 </div>
 <style>
-#viewport { width: 600px; height: 600px; overflow: hidden; border: 1px solid; position: relative; perspective: 500px; }
-#viewport * { transform-style: preserve-3d; }
+#viewport { width: 500px; height: 500px; overflow: hidden; border: 1px solid; position: relative; perspective: 500px; }
+#viewport * { transform-style: preserve-3d; box-sizing: border-box; }
 #camera { width: 0; height: 0; position: absolute; top: 50%; left: 50%; border: 2px solid red; }
 #scene { transition: .5s; }
-.plane, .sprite { transition: .5s; }
-.triangle { clip-path: polygon(50% 0,100% 100%,0 100%); }
+.plane, .sprite { transition: .5s; border:2px solid }
+.triangle { clip-path: polygon(50% 0,100% 100%,0 100%); border: none; }
+.triangle-bottom { clip-path: polygon(0 0,100% 0,50% 100%); }
+.triangle-left { clip-path: polygon(0 50%,100% 0,100% 100%); }
+.triangle-right { clip-path: polygon(0 0,100% 50%,0 100%); }
+.triangle-top-left { clip-path: polygon(0 0,100% 0,0 100%); }
+.triangle-top-right { clip-path: polygon(0 0,100% 0,100% 100%); }
+.triangle-bottom-left { clip-path: polygon(0 0,100% 100%,0 100%); }
+.triangle-bottom-right { clip-path: polygon(100% 0,100% 100%,0 100%); }
 .circle { border-radius: 50%; }
+.origin-bottom { transform-origin: bottom center }
 </style>
 
 <!-- JS -->
@@ -78,8 +95,12 @@ camX = camY = camZ = 0;
 camRX = camRY = camRZ = 0;
 sprite_count = 0;
 sprites = [];
+plane_count = 0;
+cube_count = 0;
+pyramid_count = 0;
 
 group = o => {
+  console.log(o);
   o.w|=0;
   o.h|=0;
   o.x|=0;
@@ -88,10 +109,11 @@ group = o => {
   o.rx|=0;
   o.ry|=0;
   o.rz|=0;
-  scene.innerHTML += `<div id=${o.n} class="group" style="position:absolute;width:${o.w}${unit};height:${o.h}${unit};transform:translateX(${o.x}${unit})translateY(${o.y}${unit})translateZ(${o.z}${unit})rotateX(${o.rx}deg)rotateY(${o.ry}deg)rotateZ(${o.rz}deg)">`;
+  scene.innerHTML += `<div id="${o.n}" class="group" style="position:absolute;width:${o.w}${unit};height:${o.h}${unit};transform:translateX(-50%)translateY(-50%)translateX(${o.x+o.w/2}${unit})translateY(${o.y+o.h/2}${unit})translateZ(${o.z}${unit})rotateX(${o.rx}deg)rotateY(${o.ry}deg)rotateZ(${o.rz}deg)">`;
 }
 
 plane = o => {
+  if(!o.n) o.n = `plane${plane_count}`;
   if(!o.css) o.css = "";
   if(!o.html) o.html = "";
   if(o.g) o.g = document.querySelector(`#${o.g}`);
@@ -104,11 +126,13 @@ plane = o => {
   o.rx|=0;
   o.ry|=0;
   o.rz|=0;
-  o.g.innerHTML += `<div id=${o.n} class="plane ${o.css}" style="position:absolute;width:${o.w}${unit};height:${o.h}${unit};background:${o.b};transform:translateX(${o.x}${unit})translateY(${o.y}${unit})translateZ(${o.z}${unit})rotateX(${o.rx}deg)rotateY(${o.ry}deg)rotateZ(${o.rz}deg)">${o.html}`;
+  o.g.innerHTML += `<div id=${o.n} class="plane ${o.css}" style="position:absolute;width:${o.w}${unit};height:${o.h}${unit};background:${o.b};transform:translateX(-50%)translateY(-50%)translateX(${o.x+o.w/2}${unit})translateY(${o.y+o.h/2}${unit})translateZ(${o.z}${unit})rotateX(${o.rx}deg)rotateY(${o.ry}deg)rotateZ(${o.rz}deg)">${o.html}`;
   
   // Firefox fix
   camZ += .0001;
   camera();
+  
+  plane_count++;
 }
 
 sprite = o => {
@@ -125,7 +149,7 @@ sprite = o => {
   o.rx|=0;
   o.ry|=0;
   o.rz|=0;
-  o.g.innerHTML += `<div id=${o.n} class="sprite ${o.css}" style="position:absolute;width:${o.w}${unit};height:${o.h}${unit};background:${o.b};transform:translateX(${o.x}${unit})translateY(${o.y}${unit})translateZ(${o.z}${unit})">${o.html}`;
+  o.g.innerHTML += `<div id=${o.n} class="sprite ${o.css}" style="position:absolute;width:${o.w}${unit};height:${o.h}${unit};background:${o.b};transform:translateX(-50%)translateY(-50%)translateX(${o.x+o.w/2}${unit})translateY(${o.y+o.w/2}${unit})translateZ(${o.z}${unit})">${o.html}`;
   sprites.push(o.n);
   
   // Firefox fix
@@ -133,6 +157,49 @@ sprite = o => {
   camera();
   
   sprite_count++;
+}
+
+cube = o => {
+  if(!o.n) o.n = `cube${cube_count}`;
+  if(o.g) o.g = document.querySelector(`#${o.g}`);
+  else o.g = scene;
+  o.w|=0;
+  o.h|=0;
+  o.x|=0;
+  o.y|=0;
+  o.z|=0;
+  o.rx|=0;
+  o.ry|=0;
+  o.rz|=0;
+  group(o);
+  plane({g:o.n,x:0,y:0,z:0,w:o.w,h:o.d,b:o.b}); // bottom
+  plane({g:o.n,x:-o.h/2,y:0,z:o.h/2,w:o.h,h:o.d,b:o.b,ry:-90}); // left
+  plane({g:o.n,x:o.w-o.h/2,y:0,z:o.h/2,w:o.h,h:o.d,b:o.b,ry:-90}); // right
+  plane({g:o.n,x:0,y:-o.h/2,z:o.h/2,w:o.w,h:o.h,b:o.b,rx:-90}); // back
+  plane({g:o.n,x:0,y:o.d-o.h/2,z:o.h/2,w:o.w,h:o.h,b:o.b,rx:-90}); // front
+  plane({g:o.n,x:0,y:0,z:o.h,w:o.w,h:o.d,b:o.b}); // top
+  cube_count++;
+}
+
+pyramid = o => {
+  if(!o.n) o.n = `pyramid${pyramid_count}`;
+  if(o.g) o.g = document.querySelector(`#${o.g}`);
+  else o.g = scene;
+  o.w|=0;
+  o.h|=0;
+  o.x|=0;
+  o.y|=0;
+  o.z|=0;
+  o.rx|=0;
+  o.ry|=0;
+  o.rz|=0;
+  group(o);
+  //plane({g:o.n,x:0,y:0,z:0,w:o.w,h:o.d,b:o.b}); // bottom
+  plane({g:o.n,x:-o.w/2,y:-o.h/2,z:0,w:o.d,h:o.h,b:o.b,ry:-60,rz:90,css:"triangle origin-bottom"}); // left
+  plane({g:o.n,x:o.w-o.w/2,y:-o.h/2,z:0,w:o.d,h:o.h,b:o.b,ry:-120,rz:90,css:"triangle origin-bottom"}); // right
+  plane({g:o.n,x:0,y:-o.w,z:0,w:o.d,h:o.h,b:o.b,rx:60,rz:180,css:"triangle origin-bottom"}); // back
+  plane({g:o.n,x:0,y:0,z:0,w:o.d,h:o.h,b:o.b,rx:120,rz:180,css:"triangle origin-bottom"}); // front
+  pyramid_count ++;
 }
 
 camera = o => {
@@ -147,12 +214,12 @@ camera = o => {
   for(var i in sprites){
     var s = document.querySelector(`#${sprites[i]}`);
     var t = s.style.transform.replace(/ *rotate.*\(.*?deg\)/g,"");
-    s.style.transform = t + ` rotateX(${-camRX}deg)`;
+    s.style.transform = t + `rotateZ(${-camRZ}deg)rotateX(${-camRX}deg)`;
   }
 }
 
 perspective = o => {
-  viewport.style.perspective = `${o}px`;
+  viewport.style.perspective = `${o}${unit}`;
   // Firefox fix
   camZ += .0001;
   camera();
@@ -165,9 +232,10 @@ camera({rx:45,ry:0,rz:0})
 group({n:"g1",x:50,y:50,w:400,h:100})
 plane({n:"p1",g:"g1",w:100,h:100,x:0,y:0,z:50,rx:-90,b:"#def"})
 plane({n:"t1",g:"g1",w:100,h:100,x:100,y:0,z:50,rx:-90,b:"#edf",css:"triangle"})
-sprite({n:"s1",g:"g1",w:100,h:100,x:200,y:0,z:50,b:"#fed"})
+sprite({n:"s1",g:"g1",w:100,h:200,x:200,y:0,z:100,b:"#fed"})
 sprite({n:"s2",g:"g1",w:100,h:100,x:300,y:0,z:50,b:"#efd",css:"circle"})
-sprite({n:"s3",g:"g1",w:100,h:100,x:400,y:0,z:50,b:"#efd",css:"circle"})
+cube({n:"c1",x:300,y:300,w:120,h:75,d:100,b:"#ddd"})
+pyramid({n:"py1",x:100,y:300,w:75,h:75,d:75,b:"#777"})
 
 
 
@@ -319,7 +387,8 @@ pre[class*="language-"] {
 	cursor: help;
 }
 
-button { background: #f3f3f3; border: 1px solid #ddd; font-size: 11px; color: #555; }
+button { background: #f3f3f3; border: 1px solid #aaa; font-size: 11px; color: #222; padding: 3px 5px; }
 pre { display: inline-block; }
 h2 { margin: 0 }
+body, html { overflow: hidden }
 </style>
