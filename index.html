@@ -39,24 +39,34 @@ CSS.remove(n)                                  // remove an item or group from t
 
 
 
+
+
+
+
+
+
+
+
+
+
 <p>Here's a list of things you can do with this framework (click the buttons to test each snippet):
-<p>- Add a green plane called "ground" in the scene: <button>CSS.plane({n:"ground",x:0,y:0,z:0,w:500,h:500,b:"#8D8"})</button>
+<p>- Add a green plane called "ground" in the scene: <button>CSS.plane({n:"ground",x:0,y:0,z:0,w:450,h:450,b:"#8D8"})</button>
 <p>- Move the camera higher: <button>CSS.camera({z:150})</button>
 <p>- Rotate the camera: <button>CSS.camera({rx:45,rz:0})</button> <button>CSS.camera({rx:45,rz:-50})</button> <button>CSS.camera({rx:45,rz:50})</button>
 <p>- Change the perspective value: <button>CSS.set_perspective(200)</button> <button>CSS.set_perspective(500)</button> <button>CSS.set_perspective(900)</button>
 <p>NB: By default, every element has its origin placed at its center. But when you want to make an element stand vertically, it's recommended to fix it at its bottom using {o:"bottom"}.
 
-<p>- Add a vertical plane called "p1": <button>CSS.plane({n:"p1",w:100,h:100,x:20,y:50,z:50,rx:-90,b:"#def",o:"bottom"})</button>
-<p>- Add a vertical triangle plane called "t1": <button>CSS.plane({n:"t1",w:100,h:100,x:140,y:50,z:50,rx:-90,b:"#edf",css:"triangle",o:"bottom"})</button>
+<p>- Add a vertical plane called "p1": <button>CSS.plane({n:"p1",w:100,h:100,x:0,y:0,z:0,rx:-90,b:"#def",o:"bottom"})</button>
+<p>- Add a vertical triangle plane called "t1": <button>CSS.plane({n:"t1",w:100,h:100,x:-150,y:-150,z:0,rx:-90,ry:30,b:"#edf",css:"triangle",o:"bottom"})</button>
 <p>NB: triangles can't have borders yet.
-<p>- Add a sprite called "s1": <button> CSS.sprite({n:"s1",w:100,h:200,x:260,y:-50,z:0,b:"#fed",o:"bottom"})</button>
-<p>- Add a circle sprite called "c1": <button> CSS.sprite({n:"s2",w:100,h:100,x:380,y:50,z:50,b:"#efd",css:"circle",o:"bottom"})</button>
+<p>- Add a sprite called "s1": <button>CSS.sprite({n:"s1",w:100,h:200,x:150,y:-150,z:0,b:"#fed",o:"bottom"})</button>
+<p>- Add a circle sprite called "c1": <button> CSS.sprite({n:"s2",w:100,h:100,x:0,y:-150,z:0,b:"#efd",css:"circle",o:"bottom"})</button>
 <p>- Rotate the camera again to see the sprites facing it <button>CSS.camera({rx:45,ry:0,rz:-80})</button> <button>CSS.camera({rx:45,ry:0,rz:80})</button> <button>CSS.camera({rx:45,ry:0,rz:0})</button>
-<p>- Add a cube called "c1": <button>cube({n:"c1",x:300,y:300,w:120,h:75,d:100,b:"#ddd"})</button>
-<p>- Add a pyramid called "py1 in the group": <button>pyramid({n:"p1",w:100,h:100,x:450,y:50,z:50,rx:-90,b:"#dfe"})</button>
-<p>- Move a shape around ...
-<p>- Remove items ...
-<p>- Animate the camera...
+<p>- Add a cube called "c1": <button>CSS.cube({n:"c1",g:"g1",x:120,y:120,w:120,h:75,d:100,rz:45,b:"#ddd"})</button>
+<p>- Add a pyramid called "py1 in the group": <button>CSS.pyramid({n:"py1",g:"g1",x:-120,y:120,w:110,h:150,d:100,rz:-45,b:"#777"})</button>
+<p>- Move shapes around <button>CSS.move({n:"p1",x:0,y:10,z:250,rx:0,rz:0})</button> <button>CSS.move({n:"c1",z:50,ry:45})</button>
+<p>- Remove items <button>p1.remove()</button> <button>py1.remove()</button>
+<p>- Animate the camera <button>rz=0;setInterval("rz+=.1;CSS.camera({rz})",33)</button>
 <br>
 <br>
 <p><b>• Download (<a href="min.zip">zip, 1.49kb</a>)</b>
@@ -84,10 +94,7 @@ CSS.remove(n)                                  // remove an item or group from t
 .circle{border-radius:50%}</code></pre>
 <p>JS:
 <pre><code class="lang-js">CSS={
-unit:"px",
-camX:0,camY:0,camZ:0,camRX:0,camRY:0,camRZ:0,
-sprite_count:0,sprites:[],plane_count:0,cube_count:0,pyramid_count:0,
-options:{},
+unit:"px",options:{},camX:0,camY:0,camZ:0,camRX:0,camRY:0,camRZ:0,sprite_count:0,sprites:[],plane_count:0,cube_count:0,pyramid_count:0,
 $:t=>document.getElementById(t),
 set_unit:t=>{CSS.unit=t},
 set_perspective:t=>{viewport.style.perspective=`${t}${CSS.unit}`,CSS.fx()},
@@ -96,8 +103,8 @@ fx:t=>{CSS.camZ+=1e-4,CSS.camera(),CSS.camZ-=1e-4},
 group:t=>{scene.innerHTML+=`&lt;div id="${t.n}" style="position:absolute;width:${t.w}${CSS.unit};height:${t.d}${CSS.unit};transform:translateX(-50%)translateY(-50%)translateX(${t.x}${CSS.unit})translateY(${t.y}${CSS.unit})translateZ(${t.z}${CSS.unit})rotateX(${t.rx}deg)rotateY(${t.ry}deg)rotateZ(${t.rz}deg)scaleX(${t.sx})scaleY(${t.sy})scaleZ(${t.sz})">`},
 plane:t=>{t.n||(t.n=`plane${CSS.plane_count++}`),CSS.init(t),t.g.innerHTML+=`&lt;div id=${t.n} class="plane ${t.css}" style="position:absolute;width:${t.w}${CSS.unit};height:${t.h}${CSS.unit};background:${t.b};transform-origin:${t.o};transform:translateX(-50%)translateY(-50%)translateX(${t.x}${CSS.unit})translateY(${t.y}${CSS.unit})translateZ(${t.z}${CSS.unit})rotateX(${t.rx}deg)rotateY(${t.ry}deg)rotateZ(${t.rz}deg)">${t.html}`,CSS.fx()},
 sprite:t=>{t.n||(t.n=`sprite${CSS.sprite_count++}`),CSS.init(t),scene.innerHTML+=`&lt;div id=${t.n} class="sprite ${t.css}" style="position:absolute;width:${t.w}${CSS.unit};height:${t.h}${CSS.unit};background:${t.b};transform-origin:${t.o};transform:translateX(-50%)translateY(-50%)translateX(${t.x}${CSS.unit})translateY(${t.y}${CSS.unit})translateZ(${t.z}${CSS.unit})">${t.html}`,CSS.sprites.push(t.n),CSS.fx()},
-cube:t=>{t.n||(t.n=`cube${CSS.cube_count++}`),CSS.init(t),CSS.group(t),CSS.plane({g:t.n,x:t.w/2,y:t.d/2,z:0,w:t.w,h:t.d,b:t.b}),CSS.plane({g:t.n,x:0,y:t.d/2,z:0,w:t.d,h:t.h,b:t.b,rx:-90,ry:-90,o:"bottom"}),CSS.plane({g:t.n,x:t.w,y:t.d/2,z:0,w:t.d,h:t.h,b:t.b,rx:-90,ry:-90,o:"bottom"}),CSS.plane({g:t.n,x:t.w/2,y:0,z:0,w:t.w,h:t.h,b:t.b,rx:-90,o:"bottom"}),CSS.plane({g:t.n,x:t.w/2,y:t.d,z:0,w:t.w,h:t.h,b:t.b,rx:-90,o:"bottom"}),CSS.plane({g:t.n,x:t.w/2,y:t.d/2,z:t.h,w:t.w,h:t.d,b:t.b})},
-pyramid:t=>{t.n||(t.n=`pyramid${CSS.pyramid_count++}`),CSS.init(t),CSS.group({n:t.n,x:t.x,y:t.y,z:t.z,w:100,d:100,rx:t.rx,ry:t.ry,rz:t.rz,sx:t.w/100,sy:t.d/100,sz:t.h/86.6025}),CSS.plane({g:t.n,x:50,y:50,z:0,w:100,h:100,b:t.b}),CSS.plane({g:t.n,x:0,y:50,z:0,w:100,h:100,b:t.b,ry:-60,rz:90,css:"triangle",o:"bottom"}),CSS.plane({g:t.n,x:100,y:50,z:0,w:100,h:100,b:t.b,ry:-120,rz:90,css:"triangle",o:"bottom"}),CSS.plane({g:t.n,x:50,y:0,z:0,w:100,h:100,b:t.b,rx:-120,rz:0,css:"triangle",o:"bottom"}),CSS.plane({g:t.n,x:50,y:100,z:0,w:100,h:100,b:t.b,rx:-60,rz:0,css:"triangle",o:"bottom"})},
+cube:t=>{t.n||(t.n=`cube${CSS.cube_count++}`),CSS.init(t),CSS.group(t),CSS.plane({g:t.n,y:t.d/2,w:t.d,h:t.h,b:t.b,rx:-90,ry:-90,o:"bottom"}),CSS.plane({g:t.n,x:t.w,y:t.d/2,w:t.d,h:t.h,b:t.b,rx:-90,ry:-90,o:"bottom"}),CSS.plane({g:t.n,x:t.w/2,y:0,w:t.w,h:t.h,b:t.b,rx:-90,o:"bottom"}),CSS.plane({g:t.n,x:t.w/2,y:t.d,w:t.w,h:t.h,b:t.b,rx:-90,o:"bottom"}),CSS.plane({g:t.n,x:t.w/2,y:t.d/2,z:t.h,w:t.w,h:t.d,b:t.b})},
+pyramid:t=>{t.n||(t.n=`pyramid${CSS.pyramid_count++}`),CSS.init(t),CSS.group({n:t.n,x:t.x,y:t.y,z:t.z,w:100,d:100,rx:t.rx,ry:t.ry,rz:t.rz,sx:t.w/100,sy:t.d/100,sz:t.h/86.6025}),CSS.plane({g:t.n,y:50,w:100,h:100,b:t.b,ry:-60,rz:90,css:"triangle",o:"bottom"}),CSS.plane({g:t.n,x:100,y:50,w:100,h:100,b:t.b,ry:-120,rz:90,css:"triangle",o:"bottom"}),CSS.plane({g:t.n,x:50,y:0,w:100,h:100,b:t.b,rx:-120,css:"triangle",o:"bottom"}),CSS.plane({g:t.n,x:50,y:100,w:100,h:100,b:t.b,rx:-60,css:"triangle",o:"bottom"})}
 camera:t=>{for(var S in t&&(t.x||0===t.x)&&(CSS.camX=t.x),t&&(t.y||0===t.y)&&(CSS.camY=t.y),t&&(t.z||0===t.z)&&(CSS.camZ=t.z),t&&(t.rx||0===t.rx)&&(CSS.camRX=t.rx),t&&(t.ry||0===t.ry)&&(CSS.camRY=t.ry),t&&(t.rz||0===t.rz)&&(CSS.camRZ=t.rz),scene.style.transformOrigin=`${CSS.camX}${CSS.unit} ${CSS.camY}${CSS.unit}`,scene.style.transform=`translateX(${-CSS.camX}${CSS.unit})translateY(${-CSS.camY}${CSS.unit})translateZ(${-CSS.camZ}${CSS.unit})rotateX(${CSS.camRX}deg)rotateY(${CSS.camRY}deg)rotateZ(${CSS.camRZ}deg)`,CSS.sprites){var n=CSS.$(CSS.sprites[S]),r=n.style.transform.replace(/ *rotate.*\(.*?deg\)/g,"");n.style.transform=r+`rotateZ(${-CSS.camRZ}deg)rotateX(${-CSS.camRX}deg)`}},
 move:t=>{if(t.n){var S=CSS.$(t.n),n=CSS.options[t.n];(t.x||0===t.x)&&(n.x=t.x),(t.y||0===t.y)&&(n.y=t.y),(t.z||0===t.z)&&(n.z=t.z),(t.rx||0===t.rx)&&(n.rx=t.rx),(t.ry||0===t.ry)&&(n.ry=t.ry),(t.rz||0===t.rz)&&(n.rz=t.rz),CSS.options[t.n]=n,S.style.transform=`translateX(-50%)translateY(-50%)translateX(${n.x}${CSS.unit})translateY(${n.y}${CSS.unit})translateZ(${n.z}${CSS.unit})rotateX(${n.rx}deg)rotateY(${n.ry}deg)rotateZ(${n.rz}deg)scaleX(${n.sx})scaleY(${n.sy})scaleZ(${n.sz})`}}}</code></pre>
 </div>
