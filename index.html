@@ -83,7 +83,7 @@ $:t=>document.getElementById(t),
 set_unit:t=>{CSS.unit=t},
 set_perspective:t=>{viewport.style.perspective=`${t}${CSS.unit}`,CSS.fx()},
 init:t=>{t.css||(t.css=""),t.html||(t.html=""),t.g?t.g=CSS.$(t.g):t.g=CSS.$("scene"),t.o||(t.o="center"),"bottom"==t.o&&(t.y-=t.h/2),t.w|=0,t.h|=0,t.x|=0,t.y|=0,t.z|=0,t.rx|=0,t.ry|=0,t.rz|=0,t.sx|=1,t.sy|=1,t.sz|=1,CSS.options[t.n]=t},
-fx:t=>{CSS.camZ+=1e-4,CSS.camera(),CSS.camZ-=1e-4},
+fx:t=>{CSS.camZ+=1e-4,CSS.camera()},
 group:t=>{scene.innerHTML+=`&lt;div id="${t.n}" clss=group style="position:absolute;width:${t.w}${CSS.unit};height:${t.d}${CSS.unit};transform:translateX(-50%)translateY(-50%)translateX(${t.x}${CSS.unit})translateY(${t.y}${CSS.unit})translateZ(${t.z}${CSS.unit})rotateX(${t.rx}deg)rotateY(${t.ry}deg)rotateZ(${t.rz}deg)scaleX(${t.sx})scaleY(${t.sy})scaleZ(${t.sz})">`},
 plane:t=>{t.n||(t.n=`plane${CSS.plane_count++}`),CSS.init(t),t.g.innerHTML+=`&lt;div id=${t.n} class="plane ${t.css}" style="position:absolute;width:${t.w}${CSS.unit};height:${t.h}${CSS.unit};background:${t.b};transform-origin:${t.o};transform:translateX(-50%)translateY(-50%)translateX(${t.x}${CSS.unit})translateY(${t.y}${CSS.unit})translateZ(${t.z}${CSS.unit})rotateX(${t.rx}deg)rotateY(${t.ry}deg)rotateZ(${t.rz}deg)">${t.html}`,CSS.fx()},
 sprite:t=>{t.n||(t.n=`sprite${CSS.sprite_count++}`),CSS.init(t),scene.innerHTML+=`&lt;div id=${t.n} class="sprite ${t.css}" style="position:absolute;width:${t.w}${CSS.unit};height:${t.h}${CSS.unit};background:${t.b};transform-origin:${t.o};transform:translateX(-50%)translateY(-50%)translateX(${t.x}${CSS.unit})translateY(${t.y}${CSS.unit})translateZ(${t.z}${CSS.unit})">${t.html}`,CSS.sprites.push(t.n),CSS.fx()},
@@ -176,11 +176,12 @@ CSS = {
   fx: o => {
     CSS.camZ += .0001;
     CSS.camera();
-    CSS.camZ -= .0001;
+    CSS.camera();
   },
   
   group: o => {
     scene.innerHTML += `<div id="${o.n}" class=group style="position:absolute;width:${o.w}${CSS.unit};height:${o.d}${CSS.unit};transform:translateX(-50%)translateY(-50%)translateX(${o.x}${CSS.unit})translateY(${o.y}${CSS.unit})translateZ(${o.z}${CSS.unit})rotateX(${o.rx}deg)rotateY(${o.ry}deg)rotateZ(${o.rz}deg)scaleX(${o.sx})scaleY(${o.sy})scaleZ(${o.sz})">`;
+    CSS.fx();
   },
   
   plane: o => {
