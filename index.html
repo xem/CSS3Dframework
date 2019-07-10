@@ -53,7 +53,7 @@ CSS.move({n,x,y,z,rx,ry,rz})                   // move and/or rotate a scene ite
 <p>- Animate the camera <button>rz=0;setInterval("rz+=1;CSS.camera({rz})",33)</button>
 <br>
 <br>
-<p><b>• Download (<a href="min.zip">zip, 1.5kb</a>)</b>
+<p><b>• Download (<a href="min.zip">zip, 1.58kb</a>)</b>
 <p>HTML:
 <pre><code class="lang-html">&lt;div id=viewport>
   &lt;div id=camera>
@@ -77,20 +77,7 @@ CSS.move({n,x,y,z,rx,ry,rz})                   // move and/or rotate a scene ite
 .triangle-bottom-right{clip-path:polygon(100% 0,100% 100%,0 100%)}
 .circle{border-radius:50%}</code></pre>
 <p>JS:
-<pre><code class="lang-js">CSS={
-unit:"px",options:{},camX:0,camY:0,camZ:0,camRX:0,camRY:0,camRZ:0,sprite_count:0,sprites:[],plane_count:0,cube_count:0,pyramid_count:0,
-$:t=>document.getElementById(t),
-set_unit:t=>{CSS.unit=t},
-set_perspective:t=>{viewport.style.perspective=`${t}${CSS.unit}`,CSS.fx()},
-init:t=>{t.css||(t.css=""),t.html||(t.html=""),t.g?t.g=CSS.$(t.g):t.g=CSS.$("scene"),t.o||(t.o="center"),"bottom"==t.o&&(t.y-=t.h/2),t.w|=0,t.h|=0,t.x|=0,t.y|=0,t.z|=0,t.rx|=0,t.ry|=0,t.rz|=0,t.sx|=1,t.sy|=1,t.sz|=1,CSS.options[t.n]=t},
-fx:t=>{CSS.camZ+=1e-4,CSS.camera()},
-group:t=>{scene.innerHTML+=`&lt;div id="${t.n}" clss=group style="position:absolute;width:${t.w}${CSS.unit};height:${t.d}${CSS.unit};transform:translateX(-50%)translateY(-50%)translateX(${t.x}${CSS.unit})translateY(${t.y}${CSS.unit})translateZ(${t.z}${CSS.unit})rotateX(${t.rx}deg)rotateY(${t.ry}deg)rotateZ(${t.rz}deg)scaleX(${t.sx})scaleY(${t.sy})scaleZ(${t.sz})">`},
-plane:t=>{t.n||(t.n=`plane${CSS.plane_count++}`),CSS.init(t),t.g.innerHTML+=`&lt;div id=${t.n} class="plane ${t.css}" style="position:absolute;width:${t.w}${CSS.unit};height:${t.h}${CSS.unit};background:${t.b};transform-origin:${t.o};transform:translateX(-50%)translateY(-50%)translateX(${t.x}${CSS.unit})translateY(${t.y}${CSS.unit})translateZ(${t.z}${CSS.unit})rotateX(${t.rx}deg)rotateY(${t.ry}deg)rotateZ(${t.rz}deg)">${t.html}`,CSS.fx()},
-sprite:t=>{t.n||(t.n=`sprite${CSS.sprite_count++}`),CSS.init(t),scene.innerHTML+=`&lt;div id=${t.n} class="sprite ${t.css}" style="position:absolute;width:${t.w}${CSS.unit};height:${t.h}${CSS.unit};background:${t.b};transform-origin:${t.o};transform:translateX(-50%)translateY(-50%)translateX(${t.x}${CSS.unit})translateY(${t.y}${CSS.unit})translateZ(${t.z}${CSS.unit})">${t.html}`,CSS.sprites.push(t.n),CSS.fx()},
-cube:t=>{t.n||(t.n=`cube${CSS.cube_count++}`),CSS.init(t),CSS.group(t),CSS.plane({g:t.n,y:t.d/2,w:t.d,h:t.h,b:t.b,rx:-90,ry:-90,o:"bottom"}),CSS.plane({g:t.n,x:t.w,y:t.d/2,w:t.d,h:t.h,b:t.b,rx:-90,ry:-90,o:"bottom"}),CSS.plane({g:t.n,x:t.w/2,y:0,w:t.w,h:t.h,b:t.b,rx:-90,o:"bottom"}),CSS.plane({g:t.n,x:t.w/2,y:t.d,w:t.w,h:t.h,b:t.b,rx:-90,o:"bottom"}),CSS.plane({g:t.n,x:t.w/2,y:t.d/2,z:t.h,w:t.w,h:t.d,b:t.b})},
-pyramid:t=>{t.n||(t.n=`pyramid${CSS.pyramid_count++}`),CSS.init(t),CSS.group({n:t.n,x:t.x,y:t.y,z:t.z,w:100,d:100,rx:t.rx,ry:t.ry,rz:t.rz,sx:t.w/100,sy:t.d/100,sz:t.h/86.6025}),CSS.plane({g:t.n,y:50,w:100,h:100,b:t.b,ry:-60,rz:90,css:"triangle",o:"bottom"}),CSS.plane({g:t.n,x:100,y:50,w:100,h:100,b:t.b,ry:-120,rz:90,css:"triangle",o:"bottom"}),CSS.plane({g:t.n,x:50,y:0,w:100,h:100,b:t.b,rx:-120,css:"triangle",o:"bottom"}),CSS.plane({g:t.n,x:50,y:100,w:100,h:100,b:t.b,rx:-60,css:"triangle",o:"bottom"})},
-camera:t=>{for(var S in t&&(t.x||0===t.x)&&(CSS.camX=t.x),t&&(t.y||0===t.y)&&(CSS.camY=t.y),t&&(t.z||0===t.z)&&(CSS.camZ=t.z),t&&(t.rx||0===t.rx)&&(CSS.camRX=t.rx),t&&(t.ry||0===t.ry)&&(CSS.camRY=t.ry),t&&(t.rz||0===t.rz)&&(CSS.camRZ=t.rz),scene.style.transformOrigin=`${CSS.camX}${CSS.unit} ${CSS.camY}${CSS.unit}`,scene.style.transform=`translateX(${-CSS.camX}${CSS.unit})translateY(${-CSS.camY}${CSS.unit})translateZ(${-CSS.camZ}${CSS.unit})rotateX(${CSS.camRX}deg)rotateY(${CSS.camRY}deg)rotateZ(${CSS.camRZ}deg)`,CSS.sprites){var n=CSS.$(CSS.sprites[S]),r=n.style.transform.replace(/ *rotate.*\(.*?deg\)/g,"");n.style.transform=r+`rotateZ(${-CSS.camRZ}deg)rotateX(${-CSS.camRX}deg)`}},
-move:t=>{if(t.n){var S=CSS.$(t.n),n=CSS.options[t.n];(t.x||0===t.x)&&(n.x=t.x),(t.y||0===t.y)&&(n.y=t.y),(t.z||0===t.z)&&(n.z=t.z),(t.rx||0===t.rx)&&(n.rx=t.rx),(t.ry||0===t.ry)&&(n.ry=t.ry),(t.rz||0===t.rz)&&(n.rz=t.rz),CSS.options[t.n]=n,S.style.transform=`translateX(-50%)translateY(-50%)translateX(${n.x}${CSS.unit})translateY(${n.y}${CSS.unit})translateZ(${n.z}${CSS.unit})rotateX(${n.rx}deg)rotateY(${n.ry}deg)rotateZ(${n.rz}deg)scaleX(${n.sx})scaleY(${n.sy})scaleZ(${n.sz})`}}}</code></pre>
+<pre><code class="lang-js">CSS={unit:"px",camX:0,camY:0,camZ:0,camRX:0,camRY:0,camRZ:0,sprite_count:0,sprites:[],plane_count:0,cube_count:0,pyramid_count:0,options:{},$:t=>document.getElementById(t),set_unit:t=>{CSS.unit=t},set_perspective:t=>{viewport.style.perspective=`${t}${CSS.unit}`,CSS.fx()},init:t=>{t.css||(t.css=""),t.html||(t.html=""),t.g?t.g=CSS.$(t.g):t.g=CSS.$("scene"),t.o||(t.o="center"),"bottom"==t.o&&(t.y-=t.h/2),t.w||(t.w=0),t.h||(t.h=0),t.x||(t.x=0),t.y||(t.y=0),t.z||(t.z=0),t.rx||(t.rx=0),t.ry||(t.ry=0),t.rz||(t.rz=0),t.sx||(t.sx=1),t.sy||(t.sy=1),t.sz||(t.sz=1),CSS.options[t.n]=t},fx:t=>{CSS.camZ+=1e-4,CSS.camera(),CSS.camera()},group:t=>{scene.innerHTML+=`&lt;div id="${t.n}" class=group style="position:absolute;width:${t.w}${CSS.unit};height:${t.d}${CSS.unit};transform:translateX(-50%)translateY(-50%)translateX(${t.x}${CSS.unit})translateY(${t.y}${CSS.unit})translateZ(${t.z}${CSS.unit})rotateX(${t.rx}deg)rotateY(${t.ry}deg)rotateZ(${t.rz}deg)scaleX(${t.sx})scaleY(${t.sy})scaleZ(${t.sz})">`,CSS.fx()},plane:t=>{t.n||(t.n=`plane${CSS.plane_count++}`),CSS.init(t),t.g.innerHTML+=`&lt;div id=${t.n} class="plane ${t.css}" style="position:absolute;width:${t.w}${CSS.unit};height:${t.h}${CSS.unit};background:${t.b};transform-origin:${t.o};transform:translateX(-50%)translateY(-50%)translateX(${t.x}${CSS.unit})translateY(${t.y}${CSS.unit})translateZ(${t.z}${CSS.unit})rotateX(${t.rx}deg)rotateY(${t.ry}deg)rotateZ(${t.rz}deg)">${t.html}`,CSS.fx()},sprite:t=>{t.n||(t.n=`sprite${CSS.sprite_count++}`),CSS.init(t),scene.innerHTML+=`&lt;div id=${t.n} class="sprite ${t.css}" style="position:absolute;width:${t.w}${CSS.unit};height:${t.h}${CSS.unit};background:${t.b};transform-origin:${t.o};transform:translateX(-50%)translateY(-50%)translateX(${t.x}${CSS.unit})translateY(${t.y}${CSS.unit})translateZ(${t.z}${CSS.unit})">${t.html}`,CSS.sprites.push(t.n),CSS.fx()},cube:t=>{t.n||(t.n=`cube${CSS.cube_count++}`),CSS.init(t),CSS.group(t),CSS.plane({g:t.n,x:t.w/2,y:t.d/2,w:t.w,h:t.d,b:t.b,css:"bottom"}),CSS.plane({g:t.n,y:t.d/2,w:t.d,h:t.h,b:t.b,rx:-90,ry:-90,o:"bottom",css:"left"}),CSS.plane({g:t.n,x:t.w,y:t.d/2,w:t.d,h:t.h,b:t.b,rx:-90,ry:-90,o:"bottom",css:"right"}),CSS.plane({g:t.n,x:t.w/2,y:0,w:t.w,h:t.h,b:t.b,rx:-90,o:"bottom",css:"back"}),CSS.plane({g:t.n,x:t.w/2,y:t.d,w:t.w,h:t.h,b:t.b,rx:-90,o:"bottom",css:"front"}),CSS.plane({g:t.n,x:t.w/2,y:t.d/2,z:t.h,w:t.w,h:t.d,b:t.b,css:"top"})},pyramid:t=>{t.n||(t.n=`pyramid${CSS.pyramid_count++}`),CSS.init(t),CSS.group({n:t.n,x:t.x,y:t.y,z:t.z,w:100,d:100,rx:t.rx,ry:t.ry,rz:t.rz,sx:t.w/100,sy:t.d/100,sz:t.h/86.6025}),CSS.plane({g:t.n,x:50,y:50,w:100,h:100,b:t.b,css:"bottom"}),CSS.plane({g:t.n,y:50,w:100,h:100,b:t.b,ry:-60,rz:90,css:"triangle left",o:"bottom"}),CSS.plane({g:t.n,x:100,y:50,w:100,h:100,b:t.b,ry:-120,rz:90,css:"triangle right",o:"bottom"}),CSS.plane({g:t.n,x:50,y:0,w:100,h:100,b:t.b,rx:-120,css:"triangle back",o:"bottom"}),CSS.plane({g:t.n,x:50,y:100,w:100,h:100,b:t.b,rx:-60,css:"triangle front",o:"bottom"})},camera:t=>{for(var S in t&&(t.x||0===t.x)&&(CSS.camX=t.x),t&&(t.y||0===t.y)&&(CSS.camY=t.y),t&&(t.z||0===t.z)&&(CSS.camZ=t.z),t&&(t.rx||0===t.rx)&&(CSS.camRX=t.rx),t&&(t.ry||0===t.ry)&&(CSS.camRY=t.ry),t&&(t.rz||0===t.rz)&&(CSS.camRZ=t.rz),scene.style.transformOrigin=`${CSS.camX}${CSS.unit} ${CSS.camY}${CSS.unit}`,scene.style.transform=`translateX(${-CSS.camX}${CSS.unit})translateY(${-CSS.camY}${CSS.unit})translateZ(${-CSS.camZ}${CSS.unit})rotateX(${CSS.camRX}deg)rotateY(${CSS.camRY}deg)rotateZ(${CSS.camRZ}deg)`,CSS.sprites){var r=CSS.$(CSS.sprites[S]),n=r.style.transform.replace(/ *rotate.*\(.*?deg\)/g,"");r.style.transform=n+`rotateZ(${-CSS.camRZ}deg)rotateX(${-CSS.camRX}deg)`}},move:t=>{if(t.n){var S=CSS.$(t.n),r=CSS.options[t.n];(t.x||0===t.x)&&(r.x=t.x),(t.y||0===t.y)&&(r.y=t.y),(t.z||0===t.z)&&(r.z=t.z),(t.rx||0===t.rx)&&(r.rx=t.rx),(t.ry||0===t.ry)&&(r.ry=t.ry),(t.rz||0===t.rz)&&(r.rz=t.rz),CSS.options[t.n]=r,S.style.transform=`translateX(-50%)translateY(-50%)translateX(${r.x}${CSS.unit})translateY(${r.y}${CSS.unit})translateZ(${r.z}${CSS.unit})rotateX(${r.rx}deg)rotateY(${r.ry}deg)rotateZ(${r.rz}deg)scaleX(${r.sx})scaleY(${r.sy})scaleZ(${r.sz})`}}}</code></pre>
 </div>
 
 <!-- HTML/CSS -->
@@ -159,17 +146,17 @@ CSS = {
     else o.g = CSS.$("scene");
     if(!o.o) o.o = "center";
     if(o.o == "bottom") o.y -= o.h/2;
-    o.w|=0;
-    o.h|=0;
-    o.x|=0;
-    o.y|=0;
-    o.z|=0;
-    o.rx|=0;
-    o.ry|=0;
-    o.rz|=0;
-    o.sx|=1;
-    o.sy|=1;
-    o.sz|=1;
+    if(!o.w) o.w = 0;
+    if(!o.h) o.h = 0;
+    if(!o.x) o.x = 0;
+    if(!o.y) o.y = 0;
+    if(!o.z) o.z = 0;
+    if(!o.rx) o.rx = 0;
+    if(!o.ry) o.ry = 0;
+    if(!o.rz) o.rz = 0;
+    if(!o.sx) o.sx = 1;
+    if(!o.sy) o.sy =1;
+    if(!o.sz) o.sz = 1;
     CSS.options[o.n] = o;
   },
   
@@ -203,23 +190,23 @@ CSS = {
     if(!o.n) o.n = `cube${CSS.cube_count++}`;
     CSS.init(o);
     CSS.group(o);
-    //CSS.plane({g:o.n,x:o.w/2,y:o.d/2,w:o.w,h:o.d,b:o.b}); // bottom
-    CSS.plane({g:o.n,y:o.d/2,w:o.d,h:o.h,b:o.b,rx:-90,ry:-90,o:"bottom"}); // left
-    CSS.plane({g:o.n,x:o.w,y:o.d/2,w:o.d,h:o.h,b:o.b,rx:-90,ry:-90,o:"bottom"}); // right
-    CSS.plane({g:o.n,x:o.w/2,y:0,w:o.w,h:o.h,b:o.b,rx:-90,o:"bottom"}); // back
-    CSS.plane({g:o.n,x:o.w/2,y:o.d,w:o.w,h:o.h,b:o.b,rx:-90,o:"bottom"}); // front
-    CSS.plane({g:o.n,x:o.w/2,y:o.d/2,z:o.h,w:o.w,h:o.d,b:o.b}); // top
+    CSS.plane({g:o.n,x:o.w/2,y:o.d/2,w:o.w,h:o.d,b:o.b,css:"bottom"}); // bottom
+    CSS.plane({g:o.n,y:o.d/2,w:o.d,h:o.h,b:o.b,rx:-90,ry:-90,o:"bottom",css:"left"}); // left
+    CSS.plane({g:o.n,x:o.w,y:o.d/2,w:o.d,h:o.h,b:o.b,rx:-90,ry:-90,o:"bottom",css:"right"}); // right
+    CSS.plane({g:o.n,x:o.w/2,y:0,w:o.w,h:o.h,b:o.b,rx:-90,o:"bottom",css:"back"}); // back
+    CSS.plane({g:o.n,x:o.w/2,y:o.d,w:o.w,h:o.h,b:o.b,rx:-90,o:"bottom",css:"front"}); // front
+    CSS.plane({g:o.n,x:o.w/2,y:o.d/2,z:o.h,w:o.w,h:o.d,b:o.b,css:"top"}); // top
   },
 
   pyramid: o => {
     if(!o.n) o.n = `pyramid${CSS.pyramid_count++}`;
     CSS.init(o);
     CSS.group({n:o.n,x:o.x,y:o.y,z:o.z,w:100,d:100,rx:o.rx,ry:o.ry,rz:o.rz,sx:o.w/100,sy:o.d/100,sz:o.h/86.6025});
-    //CSS.plane({g:o.n,x:50,y:50,w:100,h:100,b:o.b}); // bottom
-    CSS.plane({g:o.n,y:50,w:100,h:100,b:o.b,ry:-60,rz:90,css:"triangle",o:"bottom"}); // left
-    CSS.plane({g:o.n,x:100,y:50,w:100,h:100,b:o.b,ry:-120,rz:90,css:"triangle",o:"bottom"}); // right
-    CSS.plane({g:o.n,x:50,y:0,w:100,h:100,b:o.b,rx:-120,css:"triangle",o:"bottom"}); // back
-    CSS.plane({g:o.n,x:50,y:100,w:100,h:100,b:o.b,rx:-60,css:"triangle",o:"bottom"}); // front
+    CSS.plane({g:o.n,x:50,y:50,w:100,h:100,b:o.b,css:"bottom"}); // bottom
+    CSS.plane({g:o.n,y:50,w:100,h:100,b:o.b,ry:-60,rz:90,css:"triangle left",o:"bottom"}); // left
+    CSS.plane({g:o.n,x:100,y:50,w:100,h:100,b:o.b,ry:-120,rz:90,css:"triangle right",o:"bottom"}); // right
+    CSS.plane({g:o.n,x:50,y:0,w:100,h:100,b:o.b,rx:-120,css:"triangle back",o:"bottom"}); // back
+    CSS.plane({g:o.n,x:50,y:100,w:100,h:100,b:o.b,rx:-60,css:"triangle front",o:"bottom"}); // front
   },
 
   camera: o => {
