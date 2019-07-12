@@ -1,0 +1,148 @@
+body { font: 11px arial }
+
+/* PrismJS 1.16.0
+https://prismjs.com/download.html#themes=prism-okaidia&languages=markup+css+clike+javascript+css-extras */
+/**
+ * okaidia theme for JavaScript, CSS and HTML
+ * Loosely based on Monokai textmate theme by http://www.monokai.nl/
+ * @author ocodia
+ */
+
+code[class*="language-"],
+pre[class*="language-"] {
+	color: #f8f8f2;
+	background: none;
+	text-shadow: 0 1px rgba(0, 0, 0, 0.3);
+	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+	font-size: 1em;
+	text-align: left;
+	white-space: pre-wrap;
+	word-spacing: normal;
+	word-break: break-all;
+	word-wrap: normal;
+	line-height: 1.5;
+
+	-moz-tab-size: 4;
+	-o-tab-size: 4;
+	tab-size: 4;
+
+	-webkit-hyphens: none;
+	-moz-hyphens: none;
+	-ms-hyphens: none;
+	hyphens: none;
+}
+
+/* Code blocks */
+pre[class*="language-"] {
+	padding: 1em;
+	margin: .5em 0;
+	overflow: auto;
+	border-radius: 0.3em;
+}
+
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+	background: #272822;
+}
+
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+	padding: .1em;
+	border-radius: .3em;
+	white-space: normal;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: slategray;
+}
+
+.token.punctuation {
+	color: #f8f8f2;
+}
+
+.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted {
+	color: #f92672;
+}
+
+.token.boolean,
+.token.number {
+	color: #ae81ff;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+	color: #a6e22e;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+	color: #f8f8f2;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.function,
+.token.class-name {
+	color: #e6db74;
+}
+
+.token.keyword {
+	color: #66d9ef;
+}
+
+.token.regex,
+.token.important {
+	color: #fd971f;
+}
+
+.token.important,
+.token.bold {
+	font-weight: bold;
+}
+.token.italic {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+
+button { background: #f3f3f3; border: 1px solid #aaa; font-size: 11px; color: #222; padding: 3px 5px; }
+pre { display: inline-block; }
+h2 { margin: 0 }
+body, html { overflow: hidden }
+
+#viewport { width: 500px; height: 500px; overflow: hidden; border: 1px solid; position: relative; perspective: 500px; }
+#viewport * { transform-style: preserve-3d; box-sizing: border-box; }
+#camera { width: 0; height: 0; position: absolute; top: 50%; left: 50%; border: 2px solid red; }
+#scene { transition: .5s linear; }
+.plane, .sprite, .group { transition: .5s linear; border:2px solid }
+.triangle { clip-path: polygon(50% 0,100% 100%,0 100%); border: none; }
+.triangle-bottom { clip-path: polygon(0 0,100% 0,50% 100%); }
+.triangle-left { clip-path: polygon(0 50%,100% 0,100% 100%); }
+.triangle-right { clip-path: polygon(0 0,100% 50%,0 100%); }
+.triangle-top-left { clip-path: polygon(0 0,100% 0,0 100%); }
+.triangle-top-right { clip-path: polygon(0 0,100% 0,100% 100%); }
+.triangle-bottom-left { clip-path: polygon(0 0,100% 100%,0 100%); }
+.triangle-bottom-right { clip-path: polygon(100% 0,100% 100%,0 100%); }
+.circle { border-radius: 50%; }
+.origin-top { transform-origin: top center }

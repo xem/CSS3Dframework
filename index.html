@@ -1,8 +1,12 @@
-﻿<!-- Tuto -->
+﻿<!doctype html>
+<title>C3Dframework</title>
+<link rel=stylesheet href=css3d.css>
+
+<!-- Tuto -->
 <div style="float:right; width:calc(100vw - 530px); height: calc(100vh - 20px); overflow: auto;">
-<h2>CSS3Dframework</h2>
+<h2>C3Dframework</h2>
 <p><b>• Introduction</b>
-<p>This mini-framework is made for creating and animating CSS3D scenes very easily.
+<p>This mini-framework is made for creating and animating C3D scenes very easily.
 <p>The black square on the left is the viewport. Everything is displayed inside it (you can make it fullscreen if you want).
 <p>The red dot is the virtual camera. All the scene will move relatively to to this dot to simulate camera movement.
 <p>The camera and the scene's items have a default 0.5s transition when moving / rotating.
@@ -10,18 +14,19 @@
 <br>
 <p><b>• API</b>
 <p>All the parameters are optional.
-<p>Legend: n:name, g:group, w/h/d:width/height/depth, b:background, x/y/z:position, rx/ry/rz:rotation, html:innerHTML, css:CSS class, o:origin.
-<pre><code class="lang-js">CSS.set_unit(u)                                // set size unit (default "px". Use "vmin" for responsiveness)
-CSS.set_perspective(p)                         // set scene's perspective
-CSS.plane({n,g,w,h,b,x,y,z,rx,ry,rz,html,css}) // create a plane
-CSS.sprite({n,w,h,b,x,y,z,rx,ry,rz,html,css})  // create a sprite (a plane always facing the camera)
-CSS.cube({n,g,w,h,d,b,x,y,z,rx,ry,rz,css})     // create a cube
-CSS.pyramid({n,g,w,h,d,b,x,y,z,rx,ry,rz,css})  // create a square-based pyramid
-CSS.camera({x,y,z,rx,ry,rz})                   // move and/or rotate the camera
-CSS.move({n,x,y,z,rx,ry,rz})                   // move and/or rotate a scene item or a group</code></pre>
+<p>Legend: n: name, g: group, w/h/d: width/height/depth, b: background, x/y/z: position, rx/ry/rz: rotation, html: innerHTML, css: CSS class, o:origin.
+<pre><code class="lang-js">C.set_unit(u)                                // set size unit (default "px". Use "vmin" for responsiveness)
+C.set_perspective(p)                         // set scene's perspective
+C.group({n,g,w,h,x,y,z,rx,ry,rz})            // create a group
+C.plane({n,g,w,h,b,x,y,z,rx,ry,rz,html,css}) // create a plane
+C.sprite({n,w,h,b,x,y,z,rx,ry,rz,html,css})  // create a sprite (a plane always facing the camera)
+C.cube({n,g,w,h,d,b,x,y,z,rx,ry,rz,css})     // create a cube
+C.pyramid({n,g,w,h,d,b,x,y,z,rx,ry,rz,css})  // create a square-based pyramid
+C.camera({x,y,z,rx,ry,rz})                   // move and/or rotate the camera
+C.move({n,x,y,z,rx,ry,rz})                   // move and/or rotate a scene item or a group</code></pre>
 <br>
-<p><b>• CSS shapes</b>
-<p>Planes and sprites are rectangle by default but can use these built-in CSS classes: <pre><code class="lang-css">.circle                 // ⬤
+<p><b>• C shapes</b>
+<p>Planes and sprites are rectangle by default but can use these built-in C classes: <pre><code class="lang-css">.circle                 // ⬤
 .triangle               // ▲
 .triangle-bottom        // ▼
 .triangle-left          // ◄
@@ -34,23 +39,23 @@ CSS.move({n,x,y,z,rx,ry,rz})                   // move and/or rotate a scene ite
 <p><b>• Demo</b>
 
 <p>Here's a list of things you can do with this framework (click the buttons to test each snippet):
-<p>- Add a green plane called "ground" in the scene: <button>CSS.plane({n:"ground",x:0,y:0,z:0,w:450,h:450,b:"#8D8"})</button>
-<p>- Move the camera higher: <button>CSS.camera({z:150})</button>
-<p>- Rotate the camera: <button>CSS.camera({rx:45,rz:0})</button> <button>CSS.camera({rx:45,rz:-50})</button> <button>CSS.camera({rx:45,rz:50})</button>
-<p>- Change the perspective value: <button>CSS.set_perspective(200)</button> <button>CSS.set_perspective(500)</button> <button>CSS.set_perspective(900)</button>
+<p>- Add a green plane called "ground" in the scene: <button>C.plane({n:"ground",x:0,y:0,z:0,w:450,h:450,b:"#8D8"})</button>
+<p>- Move the camera higher: <button>C.camera({z:150})</button>
+<p>- Rotate the camera: <button>C.camera({rx:45,rz:0})</button> <button>C.camera({rx:45,rz:-50})</button> <button>C.camera({rx:45,rz:50})</button>
+<p>- Change the perspective value: <button>C.set_perspective(200)</button> <button>C.set_perspective(500)</button> <button>C.set_perspective(900)</button>
 <p>NB: By default, every element has its origin placed at its center. But when you want to make an element stand vertically, it's recommended to fix it at its bottom using {o:"bottom"}.
 
-<p>- Add a vertical plane called "p1": <button>CSS.plane({n:"p1",w:100,h:100,x:0,y:0,z:0,rx:-90,b:"#def",o:"bottom"})</button>
-<p>- Add a vertical triangle plane called "t1": <button>CSS.plane({n:"t1",w:100,h:100,x:-150,y:-150,z:0,rx:-90,ry:30,b:"#edf",css:"triangle",o:"bottom"})</button>
+<p>- Add a vertical plane called "p1": <button>C.plane({n:"p1",w:100,h:100,x:0,y:0,z:0,rx:-90,b:"#def",o:"bottom"})</button>
+<p>- Add a vertical triangle plane called "t1": <button>C.plane({n:"t1",w:100,h:100,x:-150,y:-150,z:0,rx:-90,ry:30,b:"#edf",css:"triangle",o:"bottom"})</button>
 <p>NB: triangles can't have borders yet.
-<p>- Add a sprite called "s1": <button>CSS.sprite({n:"s1",w:100,h:200,x:150,y:-150,z:0,b:"#fed",o:"bottom"})</button>
-<p>- Add a circle sprite called "c1": <button> CSS.sprite({n:"s2",w:100,h:100,x:0,y:-150,z:0,b:"#efd",css:"circle",o:"bottom"})</button>
-<p>- Rotate the camera again to see the sprites facing it <button>CSS.camera({rx:45,ry:0,rz:-80})</button> <button>CSS.camera({rx:45,ry:0,rz:80})</button> <button>CSS.camera({rx:45,ry:0,rz:0})</button>
-<p>- Add a cube called "c1": <button>CSS.cube({n:"c1",g:"g1",x:120,y:120,w:120,h:75,d:100,rz:45,b:"#ddd"})</button>
-<p>- Add a pyramid called "py1 in the group": <button>CSS.pyramid({n:"py1",g:"g1",x:-120,y:120,w:110,h:150,d:100,rz:-45,b:"#777"})</button>
-<p>- Move shapes around <button>CSS.move({n:"p1",x:0,y:10,z:250,rx:0,rz:0})</button> <button>CSS.move({n:"c1",z:50,ry:45})</button>
+<p>- Add a sprite called "s1": <button>C.sprite({n:"s1",w:100,h:200,x:150,y:-150,z:0,b:"#fed",o:"bottom"})</button>
+<p>- Add a circle sprite called "c1": <button> C.sprite({n:"s2",w:100,h:100,x:0,y:-150,z:0,b:"#efd",css:"circle",o:"bottom"})</button>
+<p>- Rotate the camera again to see the sprites facing it <button>C.camera({rx:45,ry:0,rz:-80})</button> <button>C.camera({rx:45,ry:0,rz:80})</button> <button>C.camera({rx:45,ry:0,rz:0})</button>
+<p>- Add a cube called "c1": <button>C.cube({n:"c1",g:"g1",x:120,y:120,w:120,h:75,d:100,rz:45,b:"#ddd"})</button>
+<p>- Add a pyramid called "py1 in the group": <button>C.pyramid({n:"py1",g:"g1",x:-120,y:120,w:110,h:150,d:100,rz:-45,b:"#777"})</button>
+<p>- Move shapes around <button>C.move({n:"p1",x:0,y:10,z:250,rx:0,rz:0})</button> <button>C.move({n:"c1",z:50,ry:45})</button>
 <p>- Remove items <button>p1.remove()</button> <button>py1.remove()</button>
-<p>- Animate the camera <button>rz=0;setInterval("rz+=1;CSS.camera({rz})",33)</button>
+<p>- Animate the camera <button>rz=0;setInterval("rz+=45;C.camera({rz})",500)</button>
 <br>
 <br>
 <p><b>• Download (<a href="min.zip">zip, 1.58kb</a>)</b>
@@ -66,7 +71,7 @@ CSS.move({n,x,y,z,rx,ry,rz})                   // move and/or rotate a scene ite
 #viewport *{transform-style:preserve-3d;box-sizing:border-box}
 #camera{width:0;height:0;position:absolute;top:50%;left:50%}
 #scene{transition:.5s}
-.plane,.sprite,.group{transition:.5s}
+.plane,.sprite,.group{transition:.5s linear}
 .triangle{clip-path:polygon(50% 0,100% 100%,0 100%);border:none}
 .triangle-bottom{clip-path:polygon(0 0,100% 0,50% 100%)}
 .triangle-left{clip-path:polygon(0 50%,100% 0,100% 100%)}
@@ -77,185 +82,16 @@ CSS.move({n,x,y,z,rx,ry,rz})                   // move and/or rotate a scene ite
 .triangle-bottom-right{clip-path:polygon(100% 0,100% 100%,0 100%)}
 .circle{border-radius:50%}</code></pre>
 <p>JS:
-<pre><code class="lang-js">CSS={unit:"px",camX:0,camY:0,camZ:0,camRX:0,camRY:0,camRZ:0,sprite_count:0,sprites:[],plane_count:0,cube_count:0,pyramid_count:0,options:{},$:t=>document.getElementById(t),set_unit:t=>{CSS.unit=t},set_perspective:t=>{viewport.style.perspective=`${t}${CSS.unit}`,CSS.fx()},init:t=>{t.css||(t.css=""),t.html||(t.html=""),t.g?t.g=CSS.$(t.g):t.g=CSS.$("scene"),t.o||(t.o="center"),"bottom"==t.o&&(t.y-=t.h/2),t.w||(t.w=0),t.h||(t.h=0),t.x||(t.x=0),t.y||(t.y=0),t.z||(t.z=0),t.rx||(t.rx=0),t.ry||(t.ry=0),t.rz||(t.rz=0),t.sx||(t.sx=1),t.sy||(t.sy=1),t.sz||(t.sz=1),CSS.options[t.n]=t},fx:t=>{CSS.camZ+=1e-4,CSS.camera(),CSS.camera()},group:t=>{scene.innerHTML+=`&lt;div id="${t.n}" class=group style="position:absolute;width:${t.w}${CSS.unit};height:${t.d}${CSS.unit};transform:translateX(-50%)translateY(-50%)translateX(${t.x}${CSS.unit})translateY(${t.y}${CSS.unit})translateZ(${t.z}${CSS.unit})rotateX(${t.rx}deg)rotateY(${t.ry}deg)rotateZ(${t.rz}deg)scaleX(${t.sx})scaleY(${t.sy})scaleZ(${t.sz})">`,CSS.fx()},plane:t=>{t.n||(t.n=`plane${CSS.plane_count++}`),CSS.init(t),t.g.innerHTML+=`&lt;div id=${t.n} class="plane ${t.css}" style="position:absolute;width:${t.w}${CSS.unit};height:${t.h}${CSS.unit};background:${t.b};transform-origin:${t.o};transform:translateX(-50%)translateY(-50%)translateX(${t.x}${CSS.unit})translateY(${t.y}${CSS.unit})translateZ(${t.z}${CSS.unit})rotateX(${t.rx}deg)rotateY(${t.ry}deg)rotateZ(${t.rz}deg)">${t.html}`,CSS.fx()},sprite:t=>{t.n||(t.n=`sprite${CSS.sprite_count++}`),CSS.init(t),scene.innerHTML+=`&lt;div id=${t.n} class="sprite ${t.css}" style="position:absolute;width:${t.w}${CSS.unit};height:${t.h}${CSS.unit};background:${t.b};transform-origin:${t.o};transform:translateX(-50%)translateY(-50%)translateX(${t.x}${CSS.unit})translateY(${t.y}${CSS.unit})translateZ(${t.z}${CSS.unit})">${t.html}`,CSS.sprites.push(t.n),CSS.fx()},cube:t=>{t.n||(t.n=`cube${CSS.cube_count++}`),CSS.init(t),CSS.group(t),CSS.plane({g:t.n,x:t.w/2,y:t.d/2,w:t.w,h:t.d,b:t.b,css:"bottom"}),CSS.plane({g:t.n,y:t.d/2,w:t.d,h:t.h,b:t.b,rx:-90,ry:-90,o:"bottom",css:"left"}),CSS.plane({g:t.n,x:t.w,y:t.d/2,w:t.d,h:t.h,b:t.b,rx:-90,ry:-90,o:"bottom",css:"right"}),CSS.plane({g:t.n,x:t.w/2,y:0,w:t.w,h:t.h,b:t.b,rx:-90,o:"bottom",css:"back"}),CSS.plane({g:t.n,x:t.w/2,y:t.d,w:t.w,h:t.h,b:t.b,rx:-90,o:"bottom",css:"front"}),CSS.plane({g:t.n,x:t.w/2,y:t.d/2,z:t.h,w:t.w,h:t.d,b:t.b,css:"top"})},pyramid:t=>{t.n||(t.n=`pyramid${CSS.pyramid_count++}`),CSS.init(t),CSS.group({n:t.n,x:t.x,y:t.y,z:t.z,w:100,d:100,rx:t.rx,ry:t.ry,rz:t.rz,sx:t.w/100,sy:t.d/100,sz:t.h/86.6025}),CSS.plane({g:t.n,x:50,y:50,w:100,h:100,b:t.b,css:"bottom"}),CSS.plane({g:t.n,y:50,w:100,h:100,b:t.b,ry:-60,rz:90,css:"triangle left",o:"bottom"}),CSS.plane({g:t.n,x:100,y:50,w:100,h:100,b:t.b,ry:-120,rz:90,css:"triangle right",o:"bottom"}),CSS.plane({g:t.n,x:50,y:0,w:100,h:100,b:t.b,rx:-120,css:"triangle back",o:"bottom"}),CSS.plane({g:t.n,x:50,y:100,w:100,h:100,b:t.b,rx:-60,css:"triangle front",o:"bottom"})},camera:t=>{for(var S in t&&(t.x||0===t.x)&&(CSS.camX=t.x),t&&(t.y||0===t.y)&&(CSS.camY=t.y),t&&(t.z||0===t.z)&&(CSS.camZ=t.z),t&&(t.rx||0===t.rx)&&(CSS.camRX=t.rx),t&&(t.ry||0===t.ry)&&(CSS.camRY=t.ry),t&&(t.rz||0===t.rz)&&(CSS.camRZ=t.rz),scene.style.transformOrigin=`${CSS.camX}${CSS.unit} ${CSS.camY}${CSS.unit}`,scene.style.transform=`translateX(${-CSS.camX}${CSS.unit})translateY(${-CSS.camY}${CSS.unit})translateZ(${-CSS.camZ}${CSS.unit})rotateX(${CSS.camRX}deg)rotateY(${CSS.camRY}deg)rotateZ(${CSS.camRZ}deg)`,CSS.sprites){var r=CSS.$(CSS.sprites[S]),n=r.style.transform.replace(/ *rotate.*\(.*?deg\)/g,"");r.style.transform=n+`rotateZ(${-CSS.camRZ}deg)rotateX(${-CSS.camRX}deg)`}},move:t=>{if(t.n){var S=CSS.$(t.n),r=CSS.options[t.n];(t.x||0===t.x)&&(r.x=t.x),(t.y||0===t.y)&&(r.y=t.y),(t.z||0===t.z)&&(r.z=t.z),(t.rx||0===t.rx)&&(r.rx=t.rx),(t.ry||0===t.ry)&&(r.ry=t.ry),(t.rz||0===t.rz)&&(r.rz=t.rz),CSS.options[t.n]=r,S.style.transform=`translateX(-50%)translateY(-50%)translateX(${r.x}${CSS.unit})translateY(${r.y}${CSS.unit})translateZ(${r.z}${CSS.unit})rotateX(${r.rx}deg)rotateY(${r.ry}deg)rotateZ(${r.rz}deg)scaleX(${r.sx})scaleY(${r.sy})scaleZ(${r.sz})`}}}</code></pre>
+<pre><code class="lang-js">C={unit:"px",camX:0,camY:0,camZ:0,camRX:0,camRY:0,camRZ:0,sprite_count:0,sprites:[],plane_count:0,cube_count:0,pyramid_count:0,options:{},$:t=>document.getElementById(t),set_unit:t=>{C.unit=t},set_perspective:t=>{viewport.style.perspective=`${t}${C.unit}`},init:t=>{t.css||(t.css=""),t.html||(t.html=""),t.g?t.g=C.$(t.g):t.g=C.$("scene"),t.o||(t.o="center"),"top left"==t.o&&(t.x+=t.w/2,t.y+=t.h/2),"top"==t.o&&(t.y+=t.h/2),"top right"==t.o&&(t.x-=t.w/2,t.y+=t.h/2),"right"==t.o&&(t.x-=t.w/2),"bottom right"==t.o&&(t.x-=t.w/2,t.y-=t.h/2),"bottom"==t.o&&(t.y-=t.h/2),"bottom left"==t.o&&(t.x+=t.w/2,t.y-=t.h/2),"left"==t.o&&(t.x+=t.w/2),t.w||(t.w=0),t.h||(t.h=0),t.x||(t.x=0),t.y||(t.y=0),t.z||(t.z=0),t.rx||(t.rx=0),t.ry||(t.ry=0),t.rz||(t.rz=0),t.sx||(t.sx=1),t.sy||(t.sy=1),t.sz||(t.sz=1),C.options[t.n]=t},group:t=>{scene.innerHTML+=`&lt;div id="${t.n}"class="group"style="position:absolute;width:${t.w}${C.unit};height:${t.d}${C.unit};transform:${C.tr(t)}">`},plane:t=>{t.n||(t.n=`plane${C.plane_count++}`),C.init(t),t.g.innerHTML+=`&lt;div id="${t.n}"class="plane ${t.css}"style="position:absolute;width:${t.w}${C.unit};height:${t.h}${C.unit};background:${t.b};transform-origin:${t.o};transform:${C.tr(t)}">${t.html}`,C.camera()},sprite:t=>{t.n||(t.n=`sprite${C.sprite_count++}`),C.init(t),scene.innerHTML+=`&lt;div id="${t.n}"class="sprite ${t.css}"style="position:absolute;width:${t.w}${C.unit};height:${t.h}${C.unit};background:${t.b};transform-origin:${t.o};transform:${C.tr(t)}">${t.html}`,C.sprites.push(t.n),C.camera()},cube:t=>{t.n||(t.n=`cube${C.cube_count++}`),C.init(t),C.group(t),C.plane({g:t.n,x:t.w/2,y:t.d/2,w:t.w,h:t.d,b:t.b,css:"bottom"}),C.plane({g:t.n,y:t.d/2,w:t.d,h:t.h,b:t.b,rx:-90,ry:-90,o:"bottom",css:"left"}),C.plane({g:t.n,x:t.w,y:t.d/2,w:t.d,h:t.h,b:t.b,rx:-90,ry:-90,o:"bottom",css:"right"}),C.plane({g:t.n,x:t.w/2,y:0,w:t.w,h:t.h,b:t.b,rx:-90,o:"bottom",css:"back"}),C.plane({g:t.n,x:t.w/2,y:t.d,w:t.w,h:t.h,b:t.b,rx:-90,o:"bottom",css:"front"}),C.plane({g:t.n,x:t.w/2,y:t.d/2,z:t.h,w:t.w,h:t.d,b:t.b,css:"top"})},pyramid:t=>{t.n||(t.n=`pyramid${C.pyramid_count++}`),C.init(t),C.group({n:t.n,x:t.x,y:t.y,z:t.z,w:100,d:100,rx:t.rx,ry:t.ry,rz:t.rz,sx:t.w/100,sy:t.d/100,sz:t.h/86.6025}),C.plane({g:t.n,x:50,y:50,w:100,h:100,b:t.b,css:"bottom"}),C.plane({g:t.n,y:50,w:100,h:100,b:t.b,ry:-60,rz:90,css:"triangle left",o:"bottom"}),C.plane({g:t.n,x:100,y:50,w:100,h:100,b:t.b,ry:-120,rz:90,css:"triangle right",o:"bottom"}),C.plane({g:t.n,x:50,y:0,w:100,h:100,b:t.b,rx:-120,css:"triangle back",o:"bottom"}),C.plane({g:t.n,x:50,y:100,w:100,h:100,b:t.b,rx:-60,css:"triangle front",o:"bottom"})},camera:t=>{for(var r in t&&(t.x||0===t.x)&&(C.camX=t.x),t&&(t.y||0===t.y)&&(C.camY=t.y),t&&(t.z||0===t.z)&&(C.camZ=t.z),t&&(t.rx||0===t.rx)&&(C.camRX=t.rx),t&&(t.ry||0===t.ry)&&(C.camRY=t.ry),t&&(t.rz||0===t.rz)&&(C.camRZ=t.rz),C.camX+=(Math.random()-.5)/1e3,scene.style.transformOrigin=`${C.camX}${C.unit} ${C.camY}${C.unit}`,scene.style.transform=`translateX(${-C.camX}${C.unit})translateY(${-C.camY}${C.unit})translateZ(${-C.camZ}${C.unit})rotateX(${C.camRX}deg)rotateY(${C.camRY}deg)rotateZ(${C.camRZ}deg)`,C.sprites){var n=C.$(C.sprites[r]),e=n.style.transform.replace(/ *rotate.*\(.*?deg\)/g,"");n.style.transform=e+`rotateZ(${-C.camRZ}deg)rotateX(${-C.camRX}deg)`}},move:t=>{if(t.n){var r=C.$(t.n),n=C.options[t.n];(t.x||0===t.x)&&(n.x=t.x),(t.y||0===t.y)&&(n.y=t.y),(t.z||0===t.z)&&(n.z=t.z),(t.rx||0===t.rx)&&(n.rx=t.rx),(t.ry||0===t.ry)&&(n.ry=t.ry),(t.rz||0===t.rz)&&(n.rz=t.rz),C.options[t.n]=n,r.style.transform=C.tr(n)}},tr:t=>`translateX(-50%)translateY(-50%)translateX(${t.x}${C.unit})translateY(${t.y}${C.unit})translateZ(${t.z}${C.unit})rotateX(${t.rx}deg)rotateY(${t.ry}deg)rotateZ(${t.rz}deg)scaleX(${t.sx})scaleY(${t.sy})scaleZ(${t.sz})`}</code></pre>
 </div>
 
-<!-- HTML/CSS -->
 <div id=viewport>
   <div id=camera>
     <div id=scene></div>
   </div>
 </div>
-<style>
-#viewport { width: 500px; height: 500px; overflow: hidden; border: 1px solid; position: relative; perspective: 500px; }
-#viewport * { transform-style: preserve-3d; box-sizing: border-box; }
-#camera { width: 0; height: 0; position: absolute; top: 50%; left: 50%; border: 2px solid red; }
-#scene { transition: .5s; }
-.plane, .sprite, .group { transition: .5s; border:2px solid }
-.triangle { clip-path: polygon(50% 0,100% 100%,0 100%); border: none; }
-.triangle-bottom { clip-path: polygon(0 0,100% 0,50% 100%); }
-.triangle-left { clip-path: polygon(0 50%,100% 0,100% 100%); }
-.triangle-right { clip-path: polygon(0 0,100% 50%,0 100%); }
-.triangle-top-left { clip-path: polygon(0 0,100% 0,0 100%); }
-.triangle-top-right { clip-path: polygon(0 0,100% 0,100% 100%); }
-.triangle-bottom-left { clip-path: polygon(0 0,100% 100%,0 100%); }
-.triangle-bottom-right { clip-path: polygon(100% 0,100% 100%,0 100%); }
-.circle { border-radius: 50%; }
-.origin-top { transform-origin: top center }
-</style>
 
-<!-- JS -->
-<script>
-
-CSS = {
-  
-  // Properties
-  
-  unit: "px",
-  camX: 0,
-  camY: 0,
-  camZ: 0,
-  camRX: 0,
-  camRY: 0,
-  camRZ: 0,
-  sprite_count: 0,
-  sprites: [],
-  plane_count: 0,
-  cube_count: 0,
-  pyramid_count: 0,
-  options: {},
-  //group_count = 0;
-
-  // Methods
-  
-  $: id => document.getElementById(id),
-  
-  set_unit: u => {
-    CSS.unit = u;
-  },
-  
-  set_perspective: o => {
-    viewport.style.perspective = `${o}${CSS.unit}`;
-    CSS.fx();
-  },
-  
-  init: o => {
-    if(!o.css) o.css = "";
-    if(!o.html) o.html = "";
-    if(o.g) o.g = CSS.$(o.g);
-    else o.g = CSS.$("scene");
-    if(!o.o) o.o = "center";
-    if(o.o == "bottom") o.y -= o.h/2;
-    if(!o.w) o.w = 0;
-    if(!o.h) o.h = 0;
-    if(!o.x) o.x = 0;
-    if(!o.y) o.y = 0;
-    if(!o.z) o.z = 0;
-    if(!o.rx) o.rx = 0;
-    if(!o.ry) o.ry = 0;
-    if(!o.rz) o.rz = 0;
-    if(!o.sx) o.sx = 1;
-    if(!o.sy) o.sy =1;
-    if(!o.sz) o.sz = 1;
-    CSS.options[o.n] = o;
-  },
-  
-  fx: o => {
-    CSS.camZ += .0001;
-    CSS.camera();
-    CSS.camera();
-  },
-  
-  group: o => {
-    scene.innerHTML += `<div id="${o.n}" class=group style="position:absolute;width:${o.w}${CSS.unit};height:${o.d}${CSS.unit};transform:translateX(-50%)translateY(-50%)translateX(${o.x}${CSS.unit})translateY(${o.y}${CSS.unit})translateZ(${o.z}${CSS.unit})rotateX(${o.rx}deg)rotateY(${o.ry}deg)rotateZ(${o.rz}deg)scaleX(${o.sx})scaleY(${o.sy})scaleZ(${o.sz})">`;
-    CSS.fx();
-  },
-  
-  plane: o => {
-    if(!o.n) o.n = `plane${CSS.plane_count++}`;
-    CSS.init(o);
-    o.g.innerHTML += `<div id=${o.n} class="plane ${o.css}" style="position:absolute;width:${o.w}${CSS.unit};height:${o.h}${CSS.unit};background:${o.b};transform-origin:${o.o};transform:translateX(-50%)translateY(-50%)translateX(${o.x}${CSS.unit})translateY(${o.y}${CSS.unit})translateZ(${o.z}${CSS.unit})rotateX(${o.rx}deg)rotateY(${o.ry}deg)rotateZ(${o.rz}deg)">${o.html}`;
-    CSS.fx();
-  },
-  
-  sprite: o => {
-    if(!o.n) o.n = `sprite${CSS.sprite_count++}`;
-    CSS.init(o);
-    scene.innerHTML += `<div id=${o.n} class="sprite ${o.css}" style="position:absolute;width:${o.w}${CSS.unit};height:${o.h}${CSS.unit};background:${o.b};transform-origin:${o.o};transform:translateX(-50%)translateY(-50%)translateX(${o.x}${CSS.unit})translateY(${o.y}${CSS.unit})translateZ(${o.z}${CSS.unit})">${o.html}`;
-    CSS.sprites.push(o.n);
-    CSS.fx();
-  },
-
-  cube: o => {
-    if(!o.n) o.n = `cube${CSS.cube_count++}`;
-    CSS.init(o);
-    CSS.group(o);
-    CSS.plane({g:o.n,x:o.w/2,y:o.d/2,w:o.w,h:o.d,b:o.b,css:"bottom"}); // bottom
-    CSS.plane({g:o.n,y:o.d/2,w:o.d,h:o.h,b:o.b,rx:-90,ry:-90,o:"bottom",css:"left"}); // left
-    CSS.plane({g:o.n,x:o.w,y:o.d/2,w:o.d,h:o.h,b:o.b,rx:-90,ry:-90,o:"bottom",css:"right"}); // right
-    CSS.plane({g:o.n,x:o.w/2,y:0,w:o.w,h:o.h,b:o.b,rx:-90,o:"bottom",css:"back"}); // back
-    CSS.plane({g:o.n,x:o.w/2,y:o.d,w:o.w,h:o.h,b:o.b,rx:-90,o:"bottom",css:"front"}); // front
-    CSS.plane({g:o.n,x:o.w/2,y:o.d/2,z:o.h,w:o.w,h:o.d,b:o.b,css:"top"}); // top
-  },
-
-  pyramid: o => {
-    if(!o.n) o.n = `pyramid${CSS.pyramid_count++}`;
-    CSS.init(o);
-    CSS.group({n:o.n,x:o.x,y:o.y,z:o.z,w:100,d:100,rx:o.rx,ry:o.ry,rz:o.rz,sx:o.w/100,sy:o.d/100,sz:o.h/86.6025});
-    CSS.plane({g:o.n,x:50,y:50,w:100,h:100,b:o.b,css:"bottom"}); // bottom
-    CSS.plane({g:o.n,y:50,w:100,h:100,b:o.b,ry:-60,rz:90,css:"triangle left",o:"bottom"}); // left
-    CSS.plane({g:o.n,x:100,y:50,w:100,h:100,b:o.b,ry:-120,rz:90,css:"triangle right",o:"bottom"}); // right
-    CSS.plane({g:o.n,x:50,y:0,w:100,h:100,b:o.b,rx:-120,css:"triangle back",o:"bottom"}); // back
-    CSS.plane({g:o.n,x:50,y:100,w:100,h:100,b:o.b,rx:-60,css:"triangle front",o:"bottom"}); // front
-  },
-
-  camera: o => {
-    if(o && (o.x || o.x === 0)) CSS.camX = o.x;
-    if(o && (o.y || o.y === 0)) CSS.camY = o.y;
-    if(o && (o.z || o.z === 0)) CSS.camZ = o.z;
-    if(o && (o.rx || o.rx === 0)) CSS.camRX = o.rx;
-    if(o && (o.ry || o.ry === 0)) CSS.camRY = o.ry;
-    if(o && (o.rz || o.rz === 0)) CSS.camRZ = o.rz;
-    scene.style.transformOrigin = `${CSS.camX}${CSS.unit} ${CSS.camY}${CSS.unit}`;
-    scene.style.transform = `translateX(${-CSS.camX}${CSS.unit})translateY(${-CSS.camY}${CSS.unit})translateZ(${-CSS.camZ}${CSS.unit})rotateX(${CSS.camRX}deg)rotateY(${CSS.camRY}deg)rotateZ(${CSS.camRZ}deg)`;
-    for(var i in CSS.sprites){
-      var s = CSS.$(CSS.sprites[i]);
-      var t = s.style.transform.replace(/ *rotate.*\(.*?deg\)/g,"");
-      s.style.transform = t + `rotateZ(${-CSS.camRZ}deg)rotateX(${-CSS.camRX}deg)`;
-    }
-  },
-
-  move: o => {
-    if(o.n){
-      var obj = CSS.$(o.n);
-      var opt = CSS.options[o.n];
-      if(o.x || o.x === 0) opt.x = o.x;
-      if(o.y || o.y === 0) opt.y = o.y;
-      if(o.z || o.z === 0) opt.z = o.z;
-      if(o.rx || o.rx === 0) opt.rx = o.rx;
-      if(o.ry || o.ry === 0) opt.ry = o.ry;
-      if(o.rz || o.rz === 0) opt.rz = o.rz;
-      CSS.options[o.n] = opt;
-      obj.style.transform = `translateX(-50%)translateY(-50%)translateX(${opt.x}${CSS.unit})translateY(${opt.y}${CSS.unit})translateZ(${opt.z}${CSS.unit})rotateX(${opt.rx}deg)rotateY(${opt.ry}deg)rotateZ(${opt.rz}deg)scaleX(${opt.sx})scaleY(${opt.sy})scaleZ(${opt.sz})`;
-    }
-  }
-}
-
-/*
-CSS.plane({n:"ground",x:0,y:0,z:0,w:450,h:450,b:"#8D8"})
-CSS.camera({x:0,y:0,z:150})
-CSS.camera({rx:45,ry:0,rz:0})
-CSS.plane({n:"p1",w:100,h:100,x:0,y:0,z:0,rx:-90,b:"#def",o:"bottom"})
-CSS.plane({n:"t1",w:100,h:100,x:-150,y:-150,z:0,rx:-90,ry:30,b:"#edf",css:"triangle",o:"bottom"})
-CSS.sprite({n:"s1",w:100,h:200,x:150,y:-150,z:0,b:"#fed",o:"bottom"})
-CSS.sprite({n:"s2",w:100,h:100,x:0,y:-150,z:0,b:"#efd",css:"circle",o:"bottom"})
-CSS.cube({n:"c1",g:"g1",x:120,y:120,w:120,h:75,d:100,rz:45,b:"#ddd"})
-CSS.pyramid({n:"py1",g:"g1",x:-120,y:120,w:110,h:150,d:100,rz:-45,b:"#777"})
-CSS.move({n:"p1",x:0,y:10,z:250,rx:0,rz:0});
-CSS.move({n:"c1",z:50,ry:45});
-*/
-
-</script>
+<script src=css3d.js></script>
 
 <script>
 onclick = e => {
@@ -263,148 +99,6 @@ onclick = e => {
     eval(e.target.innerText);
   }
 }
-
-/* PrismJS 1.16.0
-https://prismjs.com/download.html#themes=prism-okaidia&languages=markup+css+clike+javascript+css-extras */
-var _self="undefined"!=typeof window?window:"undefined"!=typeof WorkerGlobalScope&&self instanceof WorkerGlobalScope?self:{},Prism=function(g){var c=/\blang(?:uage)?-([\w-]+)\b/i,a=0,C={manual:g.Prism&&g.Prism.manual,disableWorkerMessageHandler:g.Prism&&g.Prism.disableWorkerMessageHandler,util:{encode:function(e){return e instanceof M?new M(e.type,C.util.encode(e.content),e.alias):Array.isArray(e)?e.map(C.util.encode):e.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/\u00a0/g," ")},type:function(e){return Object.prototype.toString.call(e).slice(8,-1)},objId:function(e){return e.__id||Object.defineProperty(e,"__id",{value:++a}),e.__id},clone:function n(e,t){var r,a,i=C.util.type(e);switch(t=t||{},i){case"Object":if(a=C.util.objId(e),t[a])return t[a];for(var l in r={},t[a]=r,e)e.hasOwnProperty(l)&&(r[l]=n(e[l],t));return r;case"Array":return a=C.util.objId(e),t[a]?t[a]:(r=[],t[a]=r,e.forEach(function(e,a){r[a]=n(e,t)}),r);default:return e}}},languages:{extend:function(e,a){var n=C.util.clone(C.languages[e]);for(var t in a)n[t]=a[t];return n},insertBefore:function(n,e,a,t){var r=(t=t||C.languages)[n],i={};for(var l in r)if(r.hasOwnProperty(l)){if(l==e)for(var o in a)a.hasOwnProperty(o)&&(i[o]=a[o]);a.hasOwnProperty(l)||(i[l]=r[l])}var s=t[n];return t[n]=i,C.languages.DFS(C.languages,function(e,a){a===s&&e!=n&&(this[e]=i)}),i},DFS:function e(a,n,t,r){r=r||{};var i=C.util.objId;for(var l in a)if(a.hasOwnProperty(l)){n.call(a,l,a[l],t||l);var o=a[l],s=C.util.type(o);"Object"!==s||r[i(o)]?"Array"!==s||r[i(o)]||(r[i(o)]=!0,e(o,n,l,r)):(r[i(o)]=!0,e(o,n,null,r))}}},plugins:{},highlightAll:function(e,a){C.highlightAllUnder(document,e,a)},highlightAllUnder:function(e,a,n){var t={callback:n,selector:'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code'};C.hooks.run("before-highlightall",t);for(var r,i=t.elements||e.querySelectorAll(t.selector),l=0;r=i[l++];)C.highlightElement(r,!0===a,t.callback)},highlightElement:function(e,a,n){for(var t,r="none",i=e;i&&!c.test(i.className);)i=i.parentNode;i&&(r=(i.className.match(c)||[,"none"])[1].toLowerCase(),t=C.languages[r]),e.className=e.className.replace(c,"").replace(/\s+/g," ")+" language-"+r,e.parentNode&&(i=e.parentNode,/pre/i.test(i.nodeName)&&(i.className=i.className.replace(c,"").replace(/\s+/g," ")+" language-"+r));var l={element:e,language:r,grammar:t,code:e.textContent},o=function(e){l.highlightedCode=e,C.hooks.run("before-insert",l),l.element.innerHTML=l.highlightedCode,C.hooks.run("after-highlight",l),C.hooks.run("complete",l),n&&n.call(l.element)};if(C.hooks.run("before-sanity-check",l),l.code)if(C.hooks.run("before-highlight",l),l.grammar)if(a&&g.Worker){var s=new Worker(C.filename);s.onmessage=function(e){o(e.data)},s.postMessage(JSON.stringify({language:l.language,code:l.code,immediateClose:!0}))}else o(C.highlight(l.code,l.grammar,l.language));else o(C.util.encode(l.code));else C.hooks.run("complete",l)},highlight:function(e,a,n){var t={code:e,grammar:a,language:n};return C.hooks.run("before-tokenize",t),t.tokens=C.tokenize(t.code,t.grammar),C.hooks.run("after-tokenize",t),M.stringify(C.util.encode(t.tokens),t.language)},matchGrammar:function(e,a,n,t,r,i,l){for(var o in n)if(n.hasOwnProperty(o)&&n[o]){if(o==l)return;var s=n[o];s="Array"===C.util.type(s)?s:[s];for(var g=0;g<s.length;++g){var c=s[g],u=c.inside,h=!!c.lookbehind,f=!!c.greedy,d=0,m=c.alias;if(f&&!c.pattern.global){var p=c.pattern.toString().match(/[imuy]*$/)[0];c.pattern=RegExp(c.pattern.source,p+"g")}c=c.pattern||c;for(var y=t,v=r;y<a.length;v+=a[y].length,++y){var k=a[y];if(a.length>e.length)return;if(!(k instanceof M)){if(f&&y!=a.length-1){if(c.lastIndex=v,!(x=c.exec(e)))break;for(var b=x.index+(h?x[1].length:0),w=x.index+x[0].length,A=y,P=v,O=a.length;A<O&&(P<w||!a[A].type&&!a[A-1].greedy);++A)(P+=a[A].length)<=b&&(++y,v=P);if(a[y]instanceof M)continue;N=A-y,k=e.slice(v,P),x.index-=v}else{c.lastIndex=0;var x=c.exec(k),N=1}if(x){h&&(d=x[1]?x[1].length:0);w=(b=x.index+d)+(x=x[0].slice(d)).length;var j=k.slice(0,b),S=k.slice(w),E=[y,N];j&&(++y,v+=j.length,E.push(j));var _=new M(o,u?C.tokenize(x,u):x,m,x,f);if(E.push(_),S&&E.push(S),Array.prototype.splice.apply(a,E),1!=N&&C.matchGrammar(e,a,n,y,v,!0,o),i)break}else if(i)break}}}}},tokenize:function(e,a){var n=[e],t=a.rest;if(t){for(var r in t)a[r]=t[r];delete a.rest}return C.matchGrammar(e,n,a,0,0,!1),n},hooks:{all:{},add:function(e,a){var n=C.hooks.all;n[e]=n[e]||[],n[e].push(a)},run:function(e,a){var n=C.hooks.all[e];if(n&&n.length)for(var t,r=0;t=n[r++];)t(a)}},Token:M};function M(e,a,n,t,r){this.type=e,this.content=a,this.alias=n,this.length=0|(t||"").length,this.greedy=!!r}if(g.Prism=C,M.stringify=function(e,a){if("string"==typeof e)return e;if(Array.isArray(e))return e.map(function(e){return M.stringify(e,a)}).join("");var n={type:e.type,content:M.stringify(e.content,a),tag:"span",classes:["token",e.type],attributes:{},language:a};if(e.alias){var t=Array.isArray(e.alias)?e.alias:[e.alias];Array.prototype.push.apply(n.classes,t)}C.hooks.run("wrap",n);var r=Object.keys(n.attributes).map(function(e){return e+'="'+(n.attributes[e]||"").replace(/"/g,"&quot;")+'"'}).join(" ");return"<"+n.tag+' class="'+n.classes.join(" ")+'"'+(r?" "+r:"")+">"+n.content+"</"+n.tag+">"},!g.document)return g.addEventListener&&(C.disableWorkerMessageHandler||g.addEventListener("message",function(e){var a=JSON.parse(e.data),n=a.language,t=a.code,r=a.immediateClose;g.postMessage(C.highlight(t,C.languages[n],n)),r&&g.close()},!1)),C;var e=document.currentScript||[].slice.call(document.getElementsByTagName("script")).pop();return e&&(C.filename=e.src,C.manual||e.hasAttribute("data-manual")||("loading"!==document.readyState?window.requestAnimationFrame?window.requestAnimationFrame(C.highlightAll):window.setTimeout(C.highlightAll,16):document.addEventListener("DOMContentLoaded",C.highlightAll))),C}(_self);"undefined"!=typeof module&&module.exports&&(module.exports=Prism),"undefined"!=typeof global&&(global.Prism=Prism);
-Prism.languages.markup={comment:/<!--[\s\S]*?-->/,prolog:/<\?[\s\S]+?\?>/,doctype:/<!DOCTYPE[\s\S]+?>/i,cdata:/<!\[CDATA\[[\s\S]*?]]>/i,tag:{pattern:/<\/?(?!\d)[^\s>\/=$<%]+(?:\s(?:\s*[^\s>\/=]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+(?=[\s>]))|(?=[\s/>])))+)?\s*\/?>/i,greedy:!0,inside:{tag:{pattern:/^<\/?[^\s>\/]+/i,inside:{punctuation:/^<\/?/,namespace:/^[^\s>\/:]+:/}},"attr-value":{pattern:/=\s*(?:"[^"]*"|'[^']*'|[^\s'">=]+)/i,inside:{punctuation:[/^=/,{pattern:/^(\s*)["']|["']$/,lookbehind:!0}]}},punctuation:/\/?>/,"attr-name":{pattern:/[^\s>\/]+/,inside:{namespace:/^[^\s>\/:]+:/}}}},entity:/&#?[\da-z]{1,8};/i},Prism.languages.markup.tag.inside["attr-value"].inside.entity=Prism.languages.markup.entity,Prism.hooks.add("wrap",function(a){"entity"===a.type&&(a.attributes.title=a.content.replace(/&amp;/,"&"))}),Object.defineProperty(Prism.languages.markup.tag,"addInlined",{value:function(a,e){var s={};s["language-"+e]={pattern:/(^<!\[CDATA\[)[\s\S]+?(?=\]\]>$)/i,lookbehind:!0,inside:Prism.languages[e]},s.cdata=/^<!\[CDATA\[|\]\]>$/i;var n={"included-cdata":{pattern:/<!\[CDATA\[[\s\S]*?\]\]>/i,inside:s}};n["language-"+e]={pattern:/[\s\S]+/,inside:Prism.languages[e]};var i={};i[a]={pattern:RegExp("(<__[\\s\\S]*?>)(?:<!\\[CDATA\\[[\\s\\S]*?\\]\\]>\\s*|[\\s\\S])*?(?=<\\/__>)".replace(/__/g,a),"i"),lookbehind:!0,greedy:!0,inside:n},Prism.languages.insertBefore("markup","cdata",i)}}),Prism.languages.xml=Prism.languages.extend("markup",{}),Prism.languages.html=Prism.languages.markup,Prism.languages.mathml=Prism.languages.markup,Prism.languages.svg=Prism.languages.markup;
-!function(s){var t=/("|')(?:\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/;s.languages.css={comment:/\/\*[\s\S]*?\*\//,atrule:{pattern:/@[\w-]+[\s\S]*?(?:;|(?=\s*\{))/,inside:{rule:/@[\w-]+/}},url:{pattern:RegExp("url\\((?:"+t.source+"|[^\n\r()]*)\\)","i"),inside:{function:/^url/i,punctuation:/^\(|\)$/}},selector:RegExp("[^{}\\s](?:[^{};\"']|"+t.source+")*?(?=\\s*\\{)"),string:{pattern:t,greedy:!0},property:/[-_a-z\xA0-\uFFFF][-\w\xA0-\uFFFF]*(?=\s*:)/i,important:/!important\b/i,function:/[-a-z0-9]+(?=\()/i,punctuation:/[(){};:,]/},s.languages.css.atrule.inside.rest=s.languages.css;var e=s.languages.markup;e&&(e.tag.addInlined("style","css"),s.languages.insertBefore("inside","attr-value",{"style-attr":{pattern:/\s*style=("|')(?:\\[\s\S]|(?!\1)[^\\])*\1/i,inside:{"attr-name":{pattern:/^\s*style/i,inside:e.tag.inside},punctuation:/^\s*=\s*['"]|['"]\s*$/,"attr-value":{pattern:/.+/i,inside:s.languages.css}},alias:"language-css"}},e.tag))}(Prism);
-Prism.languages.clike={comment:[{pattern:/(^|[^\\])\/\*[\s\S]*?(?:\*\/|$)/,lookbehind:!0},{pattern:/(^|[^\\:])\/\/.*/,lookbehind:!0,greedy:!0}],string:{pattern:/(["'])(?:\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,greedy:!0},"class-name":{pattern:/((?:\b(?:class|interface|extends|implements|trait|instanceof|new)\s+)|(?:catch\s+\())[\w.\\]+/i,lookbehind:!0,inside:{punctuation:/[.\\]/}},keyword:/\b(?:if|else|while|do|for|return|in|instanceof|function|new|try|throw|catch|finally|null|break|continue)\b/,boolean:/\b(?:true|false)\b/,function:/\w+(?=\()/,number:/\b0x[\da-f]+\b|(?:\b\d+\.?\d*|\B\.\d+)(?:e[+-]?\d+)?/i,operator:/--?|\+\+?|!=?=?|<=?|>=?|==?=?|&&?|\|\|?|\?|\*|\/|~|\^|%/,punctuation:/[{}[\];(),.:]/};
-Prism.languages.javascript=Prism.languages.extend("clike",{"class-name":[Prism.languages.clike["class-name"],{pattern:/(^|[^$\w\xA0-\uFFFF])[_$A-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\.(?:prototype|constructor))/,lookbehind:!0}],keyword:[{pattern:/((?:^|})\s*)(?:catch|finally)\b/,lookbehind:!0},{pattern:/(^|[^.])\b(?:as|async(?=\s*(?:function\b|\(|[$\w\xA0-\uFFFF]|$))|await|break|case|class|const|continue|debugger|default|delete|do|else|enum|export|extends|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|undefined|var|void|while|with|yield)\b/,lookbehind:!0}],number:/\b(?:(?:0[xX][\dA-Fa-f]+|0[bB][01]+|0[oO][0-7]+)n?|\d+n|NaN|Infinity)\b|(?:\b\d+\.?\d*|\B\.\d+)(?:[Ee][+-]?\d+)?/,function:/[_$a-zA-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\s*(?:\.\s*(?:apply|bind|call)\s*)?\()/,operator:/-[-=]?|\+[+=]?|!=?=?|<<?=?|>>?>?=?|=(?:==?|>)?|&[&=]?|\|[|=]?|\*\*?=?|\/=?|~|\^=?|%=?|\?|\.{3}/}),Prism.languages.javascript["class-name"][0].pattern=/(\b(?:class|interface|extends|implements|instanceof|new)\s+)[\w.\\]+/,Prism.languages.insertBefore("javascript","keyword",{regex:{pattern:/((?:^|[^$\w\xA0-\uFFFF."'\])\s])\s*)\/(\[(?:[^\]\\\r\n]|\\.)*]|\\.|[^/\\\[\r\n])+\/[gimyus]{0,6}(?=\s*($|[\r\n,.;})\]]))/,lookbehind:!0,greedy:!0},"function-variable":{pattern:/[_$a-zA-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\s*[=:]\s*(?:async\s*)?(?:\bfunction\b|(?:\((?:[^()]|\([^()]*\))*\)|[_$a-zA-Z\xA0-\uFFFF][$\w\xA0-\uFFFF]*)\s*=>))/,alias:"function"},parameter:[{pattern:/(function(?:\s+[_$A-Za-z\xA0-\uFFFF][$\w\xA0-\uFFFF]*)?\s*\(\s*)(?!\s)(?:[^()]|\([^()]*\))+?(?=\s*\))/,lookbehind:!0,inside:Prism.languages.javascript},{pattern:/[_$a-z\xA0-\uFFFF][$\w\xA0-\uFFFF]*(?=\s*=>)/i,inside:Prism.languages.javascript},{pattern:/(\(\s*)(?!\s)(?:[^()]|\([^()]*\))+?(?=\s*\)\s*=>)/,lookbehind:!0,inside:Prism.languages.javascript},{pattern:/((?:\b|\s|^)(?!(?:as|async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|finally|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|try|typeof|undefined|var|void|while|with|yield)(?![$\w\xA0-\uFFFF]))(?:[_$A-Za-z\xA0-\uFFFF][$\w\xA0-\uFFFF]*\s*)\(\s*)(?!\s)(?:[^()]|\([^()]*\))+?(?=\s*\)\s*\{)/,lookbehind:!0,inside:Prism.languages.javascript}],constant:/\b[A-Z](?:[A-Z_]|\dx?)*\b/}),Prism.languages.insertBefore("javascript","string",{"template-string":{pattern:/`(?:\\[\s\S]|\${(?:[^{}]|{(?:[^{}]|{[^}]*})*})+}|[^\\`])*`/,greedy:!0,inside:{interpolation:{pattern:/\${(?:[^{}]|{(?:[^{}]|{[^}]*})*})+}/,inside:{"interpolation-punctuation":{pattern:/^\${|}$/,alias:"punctuation"},rest:Prism.languages.javascript}},string:/[\s\S]+/}}}),Prism.languages.markup&&Prism.languages.markup.tag.addInlined("script","javascript"),Prism.languages.js=Prism.languages.javascript;
-Prism.languages.css.selector={pattern:Prism.languages.css.selector,inside:{"pseudo-element":/:(?:after|before|first-letter|first-line|selection)|::[-\w]+/,"pseudo-class":/:[-\w]+/,class:/\.[-:.\w]+/,id:/#[-:.\w]+/,attribute:{pattern:/\[(?:[^[\]"']|("|')(?:\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1)*\]/,greedy:!0,inside:{punctuation:/^\[|\]$/,"case-sensitivity":{pattern:/(\s)[si]$/i,lookbehind:!0,alias:"keyword"},namespace:{pattern:/^(\s*)[-*\w\xA0-\uFFFF]*\|(?!=)/,lookbehind:!0,inside:{punctuation:/\|$/}},attribute:{pattern:/^(\s*)[-\w\xA0-\uFFFF]+/,lookbehind:!0},value:[/("|')(?:\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,{pattern:/(=\s*)[-\w\xA0-\uFFFF]+(?=\s*$)/,lookbehind:!0}],operator:/[|~*^$]?=/}},"n-th":[{pattern:/(\(\s*)[+-]?\d*[\dn](?:\s*[+-]\s*\d+)?(?=\s*\))/,lookbehind:!0,inside:{number:/[\dn]+/,operator:/[+-]/}},{pattern:/(\(\s*)(?:even|odd)(?=\s*\))/i,lookbehind:!0}],punctuation:/[()]/}},Prism.languages.insertBefore("css","property",{variable:{pattern:/(^|[^-\w\xA0-\uFFFF])--[-_a-z\xA0-\uFFFF][-\w\xA0-\uFFFF]*/i,lookbehind:!0}}),Prism.languages.insertBefore("css","function",{operator:{pattern:/(\s)[+\-*\/](?=\s)/,lookbehind:!0},hexcode:/#[\da-f]{3,8}/i,entity:/\\[\da-f]{1,8}/i,unit:{pattern:/(\d)(?:%|[a-z]+)/,lookbehind:!0},number:/-?[\d.]+/});
 </script>
 
-<style>
-body { font: 11px arial }
-
-/* PrismJS 1.16.0
-https://prismjs.com/download.html#themes=prism-okaidia&languages=markup+css+clike+javascript+css-extras */
-/**
- * okaidia theme for JavaScript, CSS and HTML
- * Loosely based on Monokai textmate theme by http://www.monokai.nl/
- * @author ocodia
- */
-
-code[class*="language-"],
-pre[class*="language-"] {
-	color: #f8f8f2;
-	background: none;
-	text-shadow: 0 1px rgba(0, 0, 0, 0.3);
-	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-	font-size: 1em;
-	text-align: left;
-	white-space: pre-wrap;
-	word-spacing: normal;
-	word-break: break-all;
-	word-wrap: normal;
-	line-height: 1.5;
-
-	-moz-tab-size: 4;
-	-o-tab-size: 4;
-	tab-size: 4;
-
-	-webkit-hyphens: none;
-	-moz-hyphens: none;
-	-ms-hyphens: none;
-	hyphens: none;
-}
-
-/* Code blocks */
-pre[class*="language-"] {
-	padding: 1em;
-	margin: .5em 0;
-	overflow: auto;
-	border-radius: 0.3em;
-}
-
-:not(pre) > code[class*="language-"],
-pre[class*="language-"] {
-	background: #272822;
-}
-
-/* Inline code */
-:not(pre) > code[class*="language-"] {
-	padding: .1em;
-	border-radius: .3em;
-	white-space: normal;
-}
-
-.token.comment,
-.token.prolog,
-.token.doctype,
-.token.cdata {
-	color: slategray;
-}
-
-.token.punctuation {
-	color: #f8f8f2;
-}
-
-.namespace {
-	opacity: .7;
-}
-
-.token.property,
-.token.tag,
-.token.constant,
-.token.symbol,
-.token.deleted {
-	color: #f92672;
-}
-
-.token.boolean,
-.token.number {
-	color: #ae81ff;
-}
-
-.token.selector,
-.token.attr-name,
-.token.string,
-.token.char,
-.token.builtin,
-.token.inserted {
-	color: #a6e22e;
-}
-
-.token.operator,
-.token.entity,
-.token.url,
-.language-css .token.string,
-.style .token.string,
-.token.variable {
-	color: #f8f8f2;
-}
-
-.token.atrule,
-.token.attr-value,
-.token.function,
-.token.class-name {
-	color: #e6db74;
-}
-
-.token.keyword {
-	color: #66d9ef;
-}
-
-.token.regex,
-.token.important {
-	color: #fd971f;
-}
-
-.token.important,
-.token.bold {
-	font-weight: bold;
-}
-.token.italic {
-	font-style: italic;
-}
-
-.token.entity {
-	cursor: help;
-}
-
-button { background: #f3f3f3; border: 1px solid #aaa; font-size: 11px; color: #222; padding: 3px 5px; }
-pre { display: inline-block; }
-h2 { margin: 0 }
-body, html { overflow: hidden }
-</style>
+<script src=prism.js></script>
