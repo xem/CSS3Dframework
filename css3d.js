@@ -1,5 +1,4 @@
-﻿
-C = {
+﻿C = {
   unit: "px",
   camX: 0,
   camY: 0,
@@ -27,8 +26,7 @@ C = {
   init: o => {
     if(!o.css) o.css = "";
     if(!o.html) o.html = "";
-    if(o.g) o.g = C.$(o.g);
-    else o.g = C.$("scene");
+    if(!o.g) o.g = "scene";
     if(!o.o) o.o = "center";
     if(o.o == "top left") o.x += o.w/2, o.y += o.h/2;
     if(o.o == "top") o.y += o.h/2;
@@ -47,26 +45,28 @@ C = {
     if(!o.ry) o.ry = 0;
     if(!o.rz) o.rz = 0;
     if(!o.sx) o.sx = 1;
-    if(!o.sy) o.sy =1;
+    if(!o.sy) o.sy = 1;
     if(!o.sz) o.sz = 1;
     C.options[o.n] = o;
   },
   
   group: o => {
-    scene.innerHTML += `<div id="${o.n}"class="group"style="position:absolute;width:${o.w}${C.unit};height:${o.d}${C.unit};transform:${C.tr(o)}">`;
+    if(!o.d && !(o.d === 0)) o.d = o.h;
+    C.init(o);
+    C.$(o.g).innerHTML += `<div id="${o.n}"class="group"style="position:absolute;width:${o.w}${C.unit};height:${o.d}${C.unit};transform:${C.tr(o)}">`;
   },
   
   plane: o => {
     if(!o.n) o.n = `plane${C.plane_count++}`;
     C.init(o);
-    o.g.innerHTML += `<div id="${o.n}"class="plane ${o.css}"style="position:absolute;width:${o.w}${C.unit};height:${o.h}${C.unit};background:${o.b};transform-origin:${o.o};transform:${C.tr(o)}">${o.html}`;
+    C.$(o.g).innerHTML += `<div id="${o.n}"class="plane ${o.css}"style="position:absolute;width:${o.w}${C.unit};height:${o.h}${C.unit};background:${o.b};transform-origin:${o.o};transform:${C.tr(o)}">${o.html}`;
     C.camera();
   },
   
   sprite: o => {
     if(!o.n) o.n = `sprite${C.sprite_count++}`;
     C.init(o);
-    scene.innerHTML += `<div id="${o.n}"class="sprite ${o.css}"style="position:absolute;width:${o.w}${C.unit};height:${o.h}${C.unit};background:${o.b};transform-origin:${o.o};transform:${C.tr(o)}">${o.html}`;
+    C.$(o.g).innerHTML += `<div id="${o.n}"class="sprite ${o.css}"style="position:absolute;width:${o.w}${C.unit};height:${o.h}${C.unit};background:${o.b};transform-origin:${o.o};transform:${C.tr(o)}">${o.html}`;
     C.sprites.push(o.n);
     C.camera();
   },
@@ -86,7 +86,7 @@ C = {
   pyramid: o => {
     if(!o.n) o.n = `pyramid${C.pyramid_count++}`;
     C.init(o);
-    C.group({n:o.n,x:o.x,y:o.y,z:o.z,w:100,d:100,rx:o.rx,ry:o.ry,rz:o.rz,sx:o.w/100,sy:o.d/100,sz:o.h/86.6025});
+    C.group({n:o.n,g:o.g,x:o.x,y:o.y,z:o.z,w:100,d:100,rx:o.rx,ry:o.ry,rz:o.rz,sx:o.w/100,sy:o.d/100,sz:o.h/86.6025});
     C.plane({g:o.n,x:50,y:50,w:100,h:100,b:o.b,css:"bottom"}); // bottom
     C.plane({g:o.n,y:50,w:100,h:100,b:o.b,ry:-60,rz:90,css:"triangle left",o:"bottom"}); // left
     C.plane({g:o.n,x:100,y:50,w:100,h:100,b:o.b,ry:-120,rz:90,css:"triangle right",o:"bottom"}); // right
