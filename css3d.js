@@ -102,7 +102,6 @@
     if(o && (o.ry || o.ry === 0)) C.camRY = o.ry;
     if(o && (o.rz || o.rz === 0)) C.camRZ = o.rz;
     C.camX += ((Math.random() - .5)/1000);
-    scene.style.transformOrigin = `${C.camX}${C.unit} ${C.camY}${C.unit}`;
     scene.style.transform = `translateX(${-C.camX}${C.unit})translateY(${-C.camY}${C.unit})translateZ(${-C.camZ}${C.unit})rotateX(${C.camRX}deg)rotateY(${C.camRY}deg)rotateZ(${C.camRZ}deg)`;
     for(var i in C.sprites){
       var s = C.$(C.sprites[i]);
