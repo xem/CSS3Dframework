@@ -1,12 +1,12 @@
 ﻿<!doctype html>
-<title>C3Dframework</title>
+<title>CSS3Dframework</title>
 <link rel=stylesheet href=css3d.css>
 
 <!-- Tuto -->
 <div style="float:right; width:calc(100vw - 530px); height: calc(100vh - 20px); overflow: auto;">
-<h2>C3Dframework</h2>
+<h2>CSS3Dframework</h2>
 <p><b>• Introduction</b>
-<p>This mini-framework is made for creating and animating C3D scenes very easily.
+<p>This mini-framework is made for creating and animating CSS3D scenes very easily.
 <p>The black square on the left is the viewport. Everything is displayed inside it (you can make it fullscreen if you want).
 <p>The red dot is the virtual camera. All the scene will move relatively to to this dot to simulate camera movement.
 <p>The camera and the scene's items have a default 0.5s transition when moving / rotating.
@@ -16,7 +16,7 @@
 <p>All the parameters are optional.
 <p>Legend: n: name, g: group, w/h/d: width/height/depth, b: background, x/y/z: position, rx/ry/rz: rotation, html: innerHTML, css: CSS class, o:origin.
 <pre><code class="lang-js">C.set_unit(u)                                // set size unit (default "px". Use "vmin" for responsiveness)
-C.set_perspective(p)                         // set scene's perspective
+C.set_perspective(p)                         // set scene's perspective (500px by default)
 C.group({n,g,w,h,x,y,z,rx,ry,rz})            // create a group
 C.plane({n,g,w,h,b,x,y,z,rx,ry,rz,html,css}) // create a plane
 C.sprite({n,w,h,b,x,y,z,rx,ry,rz,html,css})  // create a sprite (a plane always facing the camera)
@@ -60,6 +60,13 @@ C.move({n,x,y,z,rx,ry,rz})                   // move and/or rotate a scene item 
 <p>- Animate the camera <button>rz=0;setInterval("rz+=45;C.camera({rz})",500)</button>
 <br>
 <br>
+<br>
+<p><b>• Other demos and tricks</b>
+<p>- <b><a href="bobomb.html">King Bob-Omb demake</a></b> (showing how a circle sprite can be used as a sphere, like in Mario 64)
+<p>- <b><a href="https://twitter.com/MaximeEuziere/status/1150473501406617601">First-person view</a></b> (Do a translateZ on the scene equal to the -1 * the perspective value and you'll see the scene in FPV)
+<br>
+<br>
+<br>
 <p><b>• Download (<a href="min.zip">zip, 1.57kb</a>)</b>
 <p>HTML:
 <pre><code class="lang-html">&lt;div id=viewport>
@@ -74,6 +81,8 @@ C.move({n,x,y,z,rx,ry,rz})                   // move and/or rotate a scene item 
 #camera{width:0;height:0;position:absolute;top:50%;left:50%}
 #scene{transition:.5s}
 .plane,.sprite,.group{transition:.5s linear}
+
+/* Shapes (optional) */
 .triangle{clip-path:polygon(50% 0,100% 100%,0 100%);border:none}
 .triangle-bottom{clip-path:polygon(0 0,100% 0,50% 100%)}
 .triangle-left{clip-path:polygon(0 50%,100% 0,100% 100%)}
