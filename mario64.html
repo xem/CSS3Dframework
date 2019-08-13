@@ -1,4 +1,42 @@
-﻿C = {
+﻿<style>
+#viewport { width: 500px; height: 500px; overflow: hidden; border: 1px solid; position: relative; perspective: 500px; }
+#viewport * { transform-style: preserve-3d; box-sizing: border-box; }
+#camera { width: 0; height: 0; position: absolute; top: 50%; left: 50%; }
+#scene { transition: 5s linear; }
+.sprite { transition: 5s linear; }
+.triangle { clip-path: polygon(50% 0,100% 100%,0 100%); border: none; }
+.triangle-bottom { clip-path: polygon(0 0,100% 0,50% 100%); }
+.triangle-left { clip-path: polygon(0 50%,100% 0,100% 100%); }
+.triangle-right { clip-path: polygon(0 0,100% 50%,0 100%); }
+.triangle-top-left { clip-path: polygon(0 0,100% 0,0 100%); }
+.triangle-top-right { clip-path: polygon(0 0,100% 0,100% 100%); }
+.triangle-bottom-left { clip-path: polygon(0 0,100% 100%,0 100%); }
+.triangle-bottom-right { clip-path: polygon(100% 0,100% 100%,0 100%); }
+.circle { border-radius: 50%; }
+.origin-top { transform-origin: top center }
+
+.c0 .front {  }
+.c1 .front { background: #fe8!important; }
+.c2 .front { background: #0c0!important; }
+.c3 .front { background: #da4!important; }
+.c4 .front { background: #edd!important; }
+.c5 .front { background: #edd!important; }
+.c6 .front { background: #edd!important; }
+.c7 .front { background: #edd!important; }
+.p0 .right { background: #a31!important; }
+.p1 .right { background: #a31!important; }
+.p2 .right { background: #a31!important; }
+.p3 .right { background: #a31!important; }
+.p4 .right { background: #a31!important; }
+.p5 .right { background: #a31!important; }
+.p6 .right { background: #a31!important; }
+.p { text-align: center }
+
+</style>
+
+
+<script>
+C = {
   unit: "px",
   camX: 0,
   camY: 0,
@@ -53,7 +91,7 @@
   group: o => {
     if(!o.d && !(o.d === 0)) o.d = o.h;
     C.init(o);
-    C.$(o.g).innerHTML += `<div id="${o.n}"class="group ${o.css}"style="position:absolute;width:${o.w}${C.unit};height:${o.d}${C.unit};transform:${C.tr(o)}">`;
+    C.$(o.g).innerHTML += `<div id="${o.n}"class="group${o.css?" "+o.css:""}"style="position:absolute;width:${o.w}${C.unit};height:${o.d}${C.unit};transform:${C.tr(o)}">`;
   },
   
   plane: o => {
@@ -75,10 +113,10 @@
     if(!o.n) o.n = `cube${C.cube_count++}`;
     C.init(o);
     C.group(o);
-    C.plane({g:o.n,x:o.w/2,y:o.d/2,w:o.w,h:o.d,b:o.b,css:"bottom"}); // bottom
+    //C.plane({g:o.n,x:o.w/2,y:o.d/2,w:o.w,h:o.d,b:o.b,css:"bottom"}); // bottom
     C.plane({g:o.n,y:o.d/2,w:o.d,h:o.h,b:o.b,rx:-90,ry:-90,o:"bottom",css:"left"}); // left
     C.plane({g:o.n,x:o.w,y:o.d/2,w:o.d,h:o.h,b:o.b,rx:-90,ry:-90,o:"bottom",css:"right"}); // right
-    C.plane({g:o.n,x:o.w/2,y:0,w:o.w,h:o.h,b:o.b,rx:-90,o:"bottom",css:"back"}); // back
+    //C.plane({g:o.n,x:o.w/2,y:0,w:o.w,h:o.h,b:o.b,rx:-90,o:"bottom",css:"back"}); // back
     C.plane({g:o.n,x:o.w/2,y:o.d,w:o.w,h:o.h,b:o.b,rx:-90,o:"bottom",css:"front"}); // front
     C.plane({g:o.n,x:o.w/2,y:o.d/2,z:o.h,w:o.w,h:o.d,b:o.b,css:"top"}); // top
   },
@@ -90,7 +128,7 @@
     C.plane({g:o.n,x:50,y:50,w:100,h:100,b:o.b,css:"bottom"}); // bottom
     C.plane({g:o.n,y:50,w:100,h:100,b:o.b,ry:-60,rz:90,css:"triangle left",o:"bottom"}); // left
     C.plane({g:o.n,x:100,y:50,w:100,h:100,b:o.b,ry:-120,rz:90,css:"triangle right",o:"bottom"}); // right
-    C.plane({g:o.n,x:50,y:0,w:100,h:100,b:o.b,rx:-120,css:"triangle back",o:"bottom"}); // back
+    //C.plane({g:o.n,x:50,y:0,w:100,h:100,b:o.b,rx:-120,css:"triangle back",o:"bottom"}); // back
     C.plane({g:o.n,x:50,y:100,w:100,h:100,b:o.b,rx:-60,css:"triangle front",o:"bottom"}); // front
   },
 
@@ -127,17 +165,44 @@
   
   tr: o => `translateX(-50%)translateY(-50%)translateX(${o.x}${C.unit})translateY(${o.y}${C.unit})translateZ(${o.z}${C.unit})rotateX(${o.rx}deg)rotateY(${o.ry}deg)rotateZ(${o.rz}deg)scaleX(${o.sx})scaleY(${o.sy})scaleZ(${o.sz})`
 }
+</script>
+<body id=b>
 
-/*
-C.plane({n:"ground",x:0,y:0,z:0,w:450,h:450,b:"#8D8"})
-C.camera({x:0,y:0,z:150})
-C.camera({rx:45,ry:0,rz:0})
-C.plane({n:"p1",w:100,h:100,x:0,y:0,z:0,rx:-90,b:"#def",o:"bottom"})
-C.plane({n:"t1",w:100,h:100,x:-150,y:-150,z:0,rx:-90,ry:30,b:"#edf",css:"triangle",o:"bottom"})
-C.sprite({n:"s1",w:100,h:200,x:150,y:-150,z:0,b:"#fed",o:"bottom"})
-C.sprite({n:"s2",w:100,h:100,x:0,y:-150,z:0,b:"#efd",css:"circle",o:"bottom"})
-C.cube({n:"c1",g:"g1",x:120,y:120,w:120,h:75,d:100,rz:45,b:"#ddd"})
-C.pyramid({n:"py1",g:"g1",x:-120,y:120,w:110,h:150,d:100,rz:-45,b:"#777"})
-C.move({n:"p1",x:0,y:10,z:250,rx:0,rz:0});
-C.move({n:"c1",z:50,ry:45});
-*/
+  <div id=viewport>
+    <div id=camera>
+      <div id=scene></div>
+    </div>
+  </div>
+
+</body>
+<script>
+C.camera({y:-200,z:500,rx:80});
+angle = -60;
+setInterval("if(angle==60)angle=-60,C.camera({rx:30,rz:angle}); else angle=60,C.camera({rx:75,rz:angle})",5000);
+
+
+C.plane({n:"ground",x:0,y:0,z:0,w:720,h:500,b:"#19c"})
+
+// Map
+for(i in b.bgColor = m = `055000000000000552055000000000000552000500067760005012210500066660005012210555554455555012210000004400000012210000004400000012211111111111113112222211111122220222222212222222100000222211111222000000222211111222000000222222222222000000`){
+
+  if(b = +m[i]){
+  
+    // Cubes (ground/castle)
+    C.cube({w:40,d:40,y:-250+40*(i/18|0),x:-340+40*(i%18),z:+(`00022000`[b]),h:40*[,.8,1,.2,.2,6,9,12][b],css:`c${b}`,b:`#${[,`ed7`,`0a0`,`da4`][b]||`cdd`}`});    
+    
+    // Trees (sprites)
+    if(b == 2 & !(i % 7))
+      C.sprite({w:60,h:40,y:-250+40*(i/18|0)-10,x:-340+40*(i%18)+10,z:60,html:"<h1>🌳",o:"bottom"});  
+  }
+  
+  // Roof (pyramids)
+  if(i < 7)
+    C.pyramid({x:[0,0,0,250,-250,190,-190][i],y:[-220,-160,-160,-250,-250,-110,-110][i],z:[240,350,480,240,240,240,240][i],w:[500,200,100,150,150,120,120][i],d:[350,200,100,150,150,120,120][i],h:80,b:"#b31",css:`p${i}`});
+}
+
+// Peach (triangle plane)
+//<h1 style=transform-style:preserve-3d;position:fixed;width:4em;height:4em;background:#edd;clip-path:polygon(2em+0,0+4em,4em+4em);transform:translateX(16em)translateZ(11em)translateY(9em)rotateX(-90deg)scale(2>
+//        <p>👸
+C.plane({css:"triangle p",b:"#edd",html:"<h1>👸",w:150,h:100,rx:-90,x:0,y:-40,z:230})
+</script>
