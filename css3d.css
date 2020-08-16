@@ -1,4 +1,5 @@
 body { font: 11px arial }
+button { font-weight: bold;font-family: arial }
 
 /* PrismJS 1.16.0
 https://prismjs.com/download.html#themes=prism-okaidia&languages=markup+css+clike+javascript+css-extras */
@@ -135,7 +136,7 @@ body, html { overflow: hidden }
 #viewport * { transform-style: preserve-3d; box-sizing: border-box; }
 #camera { width: 0; height: 0; position: absolute; top: 50%; left: 50%; border: 2px solid red; }
 #scene { transition: .5s linear; }
-.plane, .sprite, .group { transition: .5s linear; border:2px solid }
+.plane, .sprite, .group { transition: .5s linear; }
 .triangle { clip-path: polygon(50% 0,100% 100%,0 100%); border: none; }
 .triangle-bottom { clip-path: polygon(0 0,100% 0,50% 100%); }
 .triangle-left { clip-path: polygon(0 50%,100% 0,100% 100%); }

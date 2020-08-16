@@ -9,21 +9,21 @@
 <p>This mini-framework is made for creating and animating CSS3D scenes very easily.
 <p>The black square on the left is the viewport. Everything is displayed inside it (you can make it fullscreen if you want).
 <p>The red dot is the virtual camera. All the scene will move relatively to to this dot to simulate camera movement.
-<p>The camera and the scene's items have a default 0.5s transition when moving / rotating.
+<p>The camera and the scene's items have a default 0.5s transition when moving / rotating, but it's editable.
 <br>
 <br>
 <p><b>• API</b>
 <p>All the parameters are optional.
-<p>Legend: n: name, g: group, w/h/d: width/height/depth, b: background, x/y/z: position, rx/ry/rz: rotation, html: innerHTML, css: CSS class, o:origin.
-<pre><code class="lang-js">C.set_unit(u)                                // set size unit (default "px". Use "vmin" for responsiveness)
-C.set_perspective(p)                         // set scene's perspective (500px by default)
-C.group({n,g,w,h,x,y,z,rx,ry,rz})            // create a group
-C.plane({n,g,w,h,b,x,y,z,rx,ry,rz,html,css}) // create a plane
-C.sprite({n,w,h,b,x,y,z,rx,ry,rz,html,css})  // create a sprite (a plane always facing the camera)
-C.cube({n,g,w,h,d,b,x,y,z,rx,ry,rz,css})     // create a cube
-C.pyramid({n,g,w,h,d,b,x,y,z,rx,ry,rz,css})  // create a square-based pyramid
-C.camera({x,y,z,rx,ry,rz})                   // move and/or rotate the camera
-C.move({n,x,y,z,rx,ry,rz})                   // move and/or rotate a scene item or a group</code></pre>
+<p>Legend: n: name, g: group, w/h/d: width/height/depth, b/b2/b3: background color(s), x/y/z: position, rx/ry/rz: rotation, html: innerHTML, css: CSS class, o:origin.
+<pre><code class="lang-js">C.set_unit(u)                                      // set size unit (default "px". Use "vmin" for responsiveness)
+C.set_perspective(p)                               // set scene's perspective (500px by default)
+C.group({n,g,w,h,x,y,z,rx,ry,rz})                  // create a group
+C.plane({n,g,w,h,b,x,y,z,rx,ry,rz,html,css})       // create a plane
+C.sprite({n,w,h,b,x,y,z,rx,ry,rz,html,css})        // create a sprite (a plane always facing the camera)
+C.cube({n,g,w,h,d,b,b2,b3,x,y,z,rx,ry,rz,css})     // create a cube
+C.pyramid({n,g,w,h,d,b,b2,b3,x,y,z,rx,ry,rz,css})  // create a square-based pyramid
+C.camera({x,y,z,rx,ry,rz})                         // move and/or rotate the camera
+C.move({n,x,y,z,rx,ry,rz})                         // move and/or rotate a scene item or a group</code></pre>
 <br>
 <p><b>• CSS shapes</b>
 <p>Planes and sprites are rectangle by default but can use these built-in CSS classes: <pre><code class="lang-css">.circle                 // ⬤
@@ -38,26 +38,25 @@ C.move({n,x,y,z,rx,ry,rz})                   // move and/or rotate a scene item 
 <br>
 <p><b>• Demo</b>
 
-<p>Here's a list of things you can do with this framework (click the buttons to test each snippet):
-<p>- Add a green plane called "ground" in the scene: <button>C.plane({n:"ground",x:0,y:0,z:0,w:450,h:450,b:"#8D8"})</button>
-<p>- Move the camera higher: <button>C.camera({z:150})</button>
-<p>- Rotate the camera: <button>C.camera({rx:45,rz:0})</button> <button>C.camera({rx:45,rz:-50})</button> <button>C.camera({rx:45,rz:50})</button>
-<p>- Change the perspective value: <button>C.set_perspective(200)</button> <button>C.set_perspective(500)</button> <button>C.set_perspective(900)</button>
-<p>NB: By default, every element has its origin placed at its center. But when you want to make an element stand vertically, it's recommended to fix it at its bottom using {o:"bottom"}.
+<p>Here's a list of things you can do with this framework (click each button to test each snippet):
+<p>1) Add a green plane called "ground" in the scene: <button>C.plane({n:"ground",x:0,y:0,z:0,w:450,h:450,b:"#8D8"})</button>
+<p>2) Move the camera higher: <button>C.camera({z:150})</button>
+<p>3) Rotate the camera: <button>C.camera({rx:45,rz:0})</button> <button>C.camera({rx:45,rz:-50})</button> <button>C.camera({rx:45,rz:50})</button>
+<p>4) Change the perspective value: <button>C.set_perspective(200)</button> <button>C.set_perspective(500)</button> <button>C.set_perspective(900)</button>
+<p>By default, all elements have their transformation origin at the center. To make an element stand vertically, it's simpler to set it at the bottom:
 
-<p>- Add a vertical plane called "p1": <button>C.plane({n:"p1",w:100,h:100,x:0,y:0,z:0,rx:-90,b:"#def",o:"bottom"})</button>
-<p>- Add a vertical triangle plane called "t1": <button>C.plane({n:"t1",w:100,h:100,x:-150,y:-150,z:0,rx:-90,ry:30,b:"#edf",css:"triangle",o:"bottom"})</button>
-<p>NB: triangles can't have borders yet.
-<p>- Add a sprite called "s1": <button>C.sprite({n:"s1",w:100,h:200,x:150,y:-150,z:0,b:"#fed",o:"bottom"})</button>
-<p>- Add a circle sprite called "c1": <button> C.sprite({n:"s2",w:100,h:100,x:0,y:-150,z:0,b:"#efd",css:"circle",o:"bottom"})</button>
-<p>- Rotate the camera again to see the sprites facing it <button>C.camera({rx:45,ry:0,rz:-80})</button> <button>C.camera({rx:45,ry:0,rz:80})</button> <button>C.camera({rx:45,ry:0,rz:0})</button>
-<p>- Add a group calleg "g1": <button>C.group({n:"g1",w:450,h:450})</button>
-<p>- Add a cube called "c1": <button>C.cube({n:"c1",g:"g1",x:340,y:340,w:120,h:75,d:100,rz:45,b:"#ddd"})</button>
-<p>- Add a pyramid called "py1" in the group: <button>C.pyramid({n:"py1",g:"g1",x:100,y:340,w:110,h:150,d:100,rz:-45,b:"#777"})</button>
-<p>- Move shapes around <button>C.move({n:"p1",x:0,y:10,z:250,rx:0,rz:0})</button> <button>C.move({n:"c1",z:50,ry:45})</button>
-<p>- Move a group <button>C.move({n:"g1",z:50})</button> <button>C.move({n:"g1",z:200,ry:180})</button>
-<p>- Remove items <button>p1.remove()</button> <button>py1.remove()</button>
-<p>- Animate the camera <button>rz=0;setInterval("rz+=45;C.camera({rz})",500)</button>
+<p>5) Add a vertical plane called "p1" standing on its bottom side: <button>C.plane({n:"p1",w:100,h:100,x:0,y:0,z:0,rx:-90,b:"#def",o:"bottom"})</button>
+<p>6) Add a vertical triangle plane called "t1": <button>C.plane({n:"t1",w:100,h:100,x:-150,y:-150,z:0,rx:-90,ry:30,b:"#edf",css:"triangle",o:"bottom"})</button>
+<p>7) Add a sprite called "s1": <button>C.sprite({n:"s1",w:100,h:200,x:150,y:-150,z:0,b:"#fed",o:"bottom"})</button>
+<p>8) Add a circle sprite called "c1": <button> C.sprite({n:"s2",w:100,h:100,x:0,y:-150,z:0,b:"#efd",css:"circle",o:"bottom"})</button>
+<p>9) Rotate the camera again to see the sprites facing it <button>C.camera({rx:45,ry:0,rz:-80})</button> <button>C.camera({rx:45,ry:0,rz:80})</button> <button>C.camera({rx:45,ry:0,rz:0})</button>
+<p>10) Add a group calleg "g1": <button>C.group({n:"g1",w:450,h:450})</button>
+<p>11) Add a cube called "c1": <button>C.cube({n:"c1",g:"g1",x:340,y:340,w:120,h:75,d:100,rz:45,b:"#ccc",b1:"#eee",b2:"#aaa"})</button> (colors b2 and b3 can be used to simulate shading)
+<p>12) Add a pyramid called "py1" in the group: <button>C.pyramid({n:"py1",g:"g1",x:100,y:340,w:110,h:150,d:100,rz:-45,b:"#777",b1:"#aaa",b2:"#444"})</button>
+<p>13) Move shapes around <button>C.move({n:"p1",x:0,y:10,z:250,rx:0,rz:0})</button> <button>C.move({n:"c1",z:50,ry:45})</button>
+<p>14) Move a group <button>C.move({n:"g1",z:50})</button> <button>C.move({n:"g1",z:200,ry:180})</button>
+<p>15) Remove items <button>p1.remove()</button> <button>py1.remove()</button>
+<p>16) Animate the camera <button>rz=0;setInterval("rz+=45;C.camera({rz})",500)</button>
 <br>
 <br>
 <br>
@@ -67,7 +66,12 @@ C.move({n,x,y,z,rx,ry,rz})                   // move and/or rotate a scene item 
 <br>
 <br>
 <br>
-<p><b>• Download (<a href="min.zip">zip, 1.68kb</a>)</b>
+<p><b>• Download (<a href="min.zip">zip, 1.53kb</a>)</b>
+
+<br>
+<br>
+
+<p><b>• Source code</b>
 <p>HTML:
 <pre><code class="lang-html">&lt;div id=viewport>
   &lt;div id=camera>
@@ -79,10 +83,11 @@ C.move({n,x,y,z,rx,ry,rz})                   // move and/or rotate a scene item 
 <pre><code class="lang-css">#viewport{width:500px;height:500px;overflow:hidden;border:1px solid;position:relative;perspective:500px}
 #viewport *{transform-style:preserve-3d;box-sizing:border-box}
 #camera{width:0;height:0;position:absolute;top:50%;left:50%}
-#scene{transition:.5s}
-.plane,.sprite,.group{transition:.5s linear}
 
-/* Shapes (optional) */
+/* Transitions (editable) */
+#scene,.plane,.sprite,.group{transition:.5s linear}
+
+/* shapes (optional) */
 .triangle{clip-path:polygon(50% 0,100% 100%,0 100%);border:none}
 .triangle-bottom{clip-path:polygon(0 0,100% 0,50% 100%)}
 .triangle-left{clip-path:polygon(0 50%,100% 0,100% 100%)}
@@ -93,8 +98,138 @@ C.move({n,x,y,z,rx,ry,rz})                   // move and/or rotate a scene item 
 .triangle-bottom-right{clip-path:polygon(100% 0,100% 100%,0 100%)}
 .circle{border-radius:50%}</code></pre>
 <p>JS:
-<pre><code class="lang-js">C={unit:"px",camX:0,camY:0,camZ:0,camRX:0,camRY:0,camRZ:0,sprite_count:0,sprites:[],plane_count:0,cube_count:0,pyramid_count:0,options:{},$:t=>document.getElementById(t),set_unit:t=>{C.unit=t},set_perspective:t=>{viewport.style.perspective=`${t}${C.unit}`},init:t=>{t.css||(t.css=""),t.html||(t.html=""),t.g||(t.g="scene"),t.o||(t.o="center"),"top left"==t.o&&(t.x+=t.w/2,t.y+=t.h/2),"top"==t.o&&(t.y+=t.h/2),"top right"==t.o&&(t.x-=t.w/2,t.y+=t.h/2),"right"==t.o&&(t.x-=t.w/2),"bottom right"==t.o&&(t.x-=t.w/2,t.y-=t.h/2),"bottom"==t.o&&(t.y-=t.h/2),"bottom left"==t.o&&(t.x+=t.w/2,t.y-=t.h/2),"left"==t.o&&(t.x+=t.w/2),t.w||(t.w=0),t.h||(t.h=0),t.x||(t.x=0),t.y||(t.y=0),t.z||(t.z=0),t.rx||(t.rx=0),t.ry||(t.ry=0),t.rz||(t.rz=0),t.sx||(t.sx=1),t.sy||(t.sy=1),t.sz||(t.sz=1),C.options[t.n]=t},group:t=>{t.d||0===t.d||(t.d=t.h),C.init(t),C.$(t.g).innerHTML+=`&lt;div id="${t.n}"class="group ${t.css}"style="position:absolute;width:${t.w}${C.unit};height:${t.d}${C.unit};transform:${C.tr(t)}">`},plane:t=>{t.n||(t.n=`plane${C.plane_count++}`),C.init(t),C.$(t.g).innerHTML+=`&lt;div id="${t.n}"class="plane ${t.css}"style="position:absolute;width:${t.w}${C.unit};height:${t.h}${C.unit};background:${t.b};transform-origin:${t.o};transform:${C.tr(t)}">${t.html}`,C.camera()},sprite:t=>{t.n||(t.n=`sprite${C.sprite_count++}`),C.init(t),C.$(t.g).innerHTML+=`&lt;div id="${t.n}"class="sprite ${t.css}"style="position:absolute;width:${t.w}${C.unit};height:${t.h}${C.unit};background:${t.b};transform-origin:${t.o};transform:${C.tr(t)}">${t.html}`,C.sprites.push(t.n),C.camera()},cube:t=>{t.n||(t.n=`cube${C.cube_count++}`),C.init(t),C.group(t),C.plane({g:t.n,x:t.w/2,y:t.d/2,w:t.w,h:t.d,b:t.b,css:"bottom"}),C.plane({g:t.n,y:t.d/2,w:t.d,h:t.h,b:t.b,rx:-90,ry:-90,o:"bottom",css:"left"}),C.plane({g:t.n,x:t.w,y:t.d/2,w:t.d,h:t.h,b:t.b,rx:-90,ry:-90,o:"bottom",css:"right"}),C.plane({g:t.n,x:t.w/2,y:0,w:t.w,h:t.h,b:t.b,rx:-90,o:"bottom",css:"back"}),C.plane({g:t.n,x:t.w/2,y:t.d,w:t.w,h:t.h,b:t.b,rx:-90,o:"bottom",css:"front"}),C.plane({g:t.n,x:t.w/2,y:t.d/2,z:t.h,w:t.w,h:t.d,b:t.b,css:"top"})},pyramid:t=>{t.n||(t.n=`pyramid${C.pyramid_count++}`),C.init(t),C.group({n:t.n,g:t.g,x:t.x,y:t.y,z:t.z,w:100,d:100,rx:t.rx,ry:t.ry,rz:t.rz,sx:t.w/100,sy:t.d/100,sz:t.h/86.6025,css:t.css}),C.plane({g:t.n,x:50,y:50,w:100,h:100,b:t.b,css:"bottom"}),C.plane({g:t.n,y:50,w:100,h:100,b:t.b,ry:-60,rz:90,css:"triangle left",o:"bottom"}),C.plane({g:t.n,x:100,y:50,w:100,h:100,b:t.b,ry:-120,rz:90,css:"triangle right",o:"bottom"}),C.plane({g:t.n,x:50,y:0,w:100,h:100,b:t.b,rx:-120,css:"triangle back",o:"bottom"}),C.plane({g:t.n,x:50,y:100,w:100,h:100,b:t.b,rx:-60,css:"triangle front",o:"bottom"})},camera:t=>{for(var r in t&&(t.x||0===t.x)&&(C.camX=t.x),t&&(t.y||0===t.y)&&(C.camY=t.y),t&&(t.z||0===t.z)&&(C.camZ=t.z),t&&(t.rx||0===t.rx)&&(C.camRX=t.rx),t&&(t.ry||0===t.ry)&&(C.camRY=t.ry),t&&(t.rz||0===t.rz)&&(C.camRZ=t.rz),C.camX+=(Math.random()-.5)/1e3,scene.style.transform=`translateX(${-C.camX}${C.unit})translateY(${-C.camY}${C.unit})translateZ(${-C.camZ}${C.unit})rotateX(${C.camRX}deg)rotateY(${C.camRY}deg)rotateZ(${C.camRZ}deg)`,C.sprites){var n=C.$(C.sprites[r]),o=n.style.transform.replace(/ *rotate.*\(.*?deg\)/g,"");n.style.transform=o+`rotateZ(${-C.camRZ}deg)rotateX(${-C.camRX}deg)`}},move:t=>{if(t.n){var r=C.$(t.n),n=C.options[t.n];(t.x||0===t.x)&&(n.x=t.x),(t.y||0===t.y)&&(n.y=t.y),(t.z||0===t.z)&&(n.z=t.z),(t.rx||0===t.rx)&&(n.rx=t.rx),(t.ry||0===t.ry)&&(n.ry=t.ry),(t.rz||0===t.rz)&&(n.rz=t.rz),C.options[t.n]=n,r.style.transform=C.tr(n)}},tr:t=>`translateX(-50%)translateY(-50%)translateX(${t.x}${C.unit})translateY(${t.y}${C.unit})translateZ(${t.z}${C.unit})rotateX(${t.rx}deg)rotateY(${t.ry}deg)rotateZ(${t.rz}deg)scaleX(${t.sx})scaleY(${t.sy})scaleZ(${t.sz})`,
-cyl:o=>{ia=360/o.s;for(s=0;s&lt;o.s;s++){a=ia*s;x=o.x+Math.sin(a*C.rad)*-o.r;z=o.z+Math.cos(a*C.rad)*-o.r;w=2*o.r*Math.tan(180/o.s*C.rad);C.plane({g:o.g,x:x,y:o.y,z:z,w:w,h:o.h,b:o.b,rx:0,ry:a,o:o.o});}}</code></pre>
+<pre><code class="lang-js">C = {
+unit: "px",
+camX: 0,
+camY: 0,
+camZ: 0,
+camRX: 0,
+camRY: 0,
+camRZ: 0,
+sprite_count: 0,
+sprites: [],
+plane_count: 0,
+cube_count: 0,
+pyramid_count: 0,
+options: {},
+$: t => self[t],
+set_unit: t => C.unit=t,
+set_perspective: t => viewport.style.perspective=`${t}${C.unit}`,
+
+// Initialize an object's properties
+init: t => {
+  t.css||(t.css=""),
+  t.html||(t.html=""),
+  t.g||(t.g="scene"),
+  t.o||(t.o="center"),
+  t.o=="top left"&&(t.x+=t.w/2,t.y+=t.h/2),
+  t.o=="top"&&(t.y+=t.h/2),
+  t.o=="top right"&&(t.x-=t.w/2,t.y+=t.h/2),
+  t.o=="right"&&(t.x-=t.w/2),
+  t.o=="bottom right"&&(t.x-=t.w/2,t.y-=t.h/2),
+  t.o=="bottom"&&(t.y-=t.h/2),
+  t.o=="bottom left"&&(t.x+=t.w/2,t.y-=t.h/2),
+  t.o=="left"&&(t.x+=t.w/2),
+  t.w||(t.w=0),
+  t.h||(t.h=0),
+  t.x||(t.x=0),
+  t.y||(t.y=0),
+  t.z||(t.z=0),
+  t.rx||(t.rx=0),
+  t.ry||(t.ry=0),
+  t.rz||(t.rz=0),
+  t.sx||(t.sx=1),
+  t.sy||(t.sy=1),
+  t.sz||(t.sz=1),
+  C.options[t.n]=t
+},
+
+// Group of objects
+group: t => { 
+  t.d||t.d===0||(t.d=t.h),
+  C.init(t),
+  C.$(t.g).innerHTML+=`&lt;div id="${t.n}"class="group ${t.css}"style="position:absolute;width:${t.w}${C.unit};height:${t.d}${C.unit};transform:${C.tr(t)}">`
+},
+
+// Plane
+plane: t => {
+  t.n||(t.n=`plane${C.plane_count++}`),
+  C.init(t),
+  C.$(t.g).innerHTML+=`&lt;div id="${t.n}"class="plane ${t.css}"style="position:absolute;width:${t.w}${C.unit};height:${t.h}${C.unit};background:${t.b};transform-origin:${t.o};transform:${C.tr(t)}">${t.html}`,
+  C.camera()
+},
+
+// Sprite (optional)
+sprite: t => {
+  t.n||(t.n=`sprite${C.sprite_count++}`),
+  C.init(t),
+  C.$(t.g).innerHTML+=`&lt;div id="${t.n}"class="sprite ${t.css}"style="position:absolute;width:${t.w}${C.unit};height:${t.h}${C.unit};background:${t.b};transform-origin:${t.o};transform:${C.tr(t)}">${t.html}`,
+  C.sprites.push(t.n),
+  C.camera()
+},
+
+// Cube (optional)
+cube: t => {
+  t.n||(t.n=`cube${C.cube_count++}`),
+  C.init(t),
+  C.group(t),
+  C.plane({g:t.n,x:t.w/2,y:t.d/2,w:t.w,h:t.d,b:t.b,css:"bottom"}),
+  C.plane({g:t.n,y:t.d/2,w:t.d,h:t.h,b:t.b1||t.b,rx:-90,ry:-90,o:"bottom",css:"left"}),
+  C.plane({g:t.n,x:t.w,y:t.d/2,w:t.d,h:t.h,b:t.b2||t.b,rx:-90,ry:-90,o:"bottom",css:"right"}),
+  C.plane({g:t.n,x:t.w/2,y:t.d,w:t.w,h:t.h,b:t.b1||t.b,rx:-90,o:"bottom",css:"front"}),
+  C.plane({g:t.n,x:t.w/2,y:0,w:t.w,h:t.h,b:t.b2||t.b,rx:-90,o:"bottom",css:"back"}),
+  C.plane({g:t.n,x:t.w/2,y:t.d/2,z:t.h,w:t.w,h:t.d,b:t.b,css:"top"})
+},
+
+// Pyramid (optional)
+pyramid: t => {
+  t.n||(t.n=`pyramid${C.pyramid_count++}`),
+  C.init(t),
+  C.group({n:t.n,g:t.g,x:t.x,y:t.y,z:t.z,w:100,d:100,rx:t.rx,ry:t.ry,rz:t.rz,sx:t.w/100,sy:t.d/100,sz:t.h/86.6025,css:t.css}),
+  C.plane({g:t.n,x:50,y:50,w:100,h:100,b:t.b,css:"bottom"}),
+  C.plane({g:t.n,y:50,w:100,h:100,b:t.b,ry:-60,rz:90,css:"triangle left",o:"bottom"}),
+  C.plane({g:t.n,x:100,y:50,w:100,h:100,b:t.b2||t.b,ry:-120,rz:90,css:"triangle right",o:"bottom"}),
+  C.plane({g:t.n,x:50,y:0,w:100,h:100,b:t.b,rx:-120,css:"triangle back",o:"bottom"}),
+  C.plane({g:t.n,x:50,y:100,w:100,h:100,b:t.b1||t.b,rx:-60,css:"triangle front",o:"bottom"})
+},
+
+// Move the camera
+camera: t => {
+  t&&(t.x||0===t.x)&&(C.camX=t.x),
+  t&&(t.y||0===t.y)&&(C.camY=t.y),
+  t&&(t.z||0===t.z)&&(C.camZ=t.z),
+  t&&(t.rx||0===t.rx)&&(C.camRX=t.rx),
+  t&&(t.ry||0===t.ry)&&(C.camRY=t.ry),
+  t&&(t.rz||0===t.rz)&&(C.camRZ=t.rz),
+  C.camX+=(Math.random()-.5)/1e3,
+  scene.style.transform=`translateX(${-C.camX}${C.unit})translateY(${-C.camY}${C.unit})translateZ(${-C.camZ}${C.unit})rotateX(${C.camRX}deg)rotateY(${C.camRY}deg)rotateZ(${C.camRZ}deg)`;
+  for(var r in C.sprites){
+    var n=C.$(C.sprites[r]),
+    o=n.style.transform.replace(/ *rotate.*\(.*?deg\)/g,"");
+    n.style.transform=o+`rotateZ(${-C.camRZ}deg)rotateX(${-C.camRX}deg)`
+  }
+},
+
+// Move an object
+move: t => {
+  if(t.n){
+   var r=C.$(t.n),
+   n=C.options[t.n];
+   (t.x||0===t.x)&&(n.x=t.x),
+   (t.y||0===t.y)&&(n.y=t.y),
+   (t.z||0===t.z)&&(n.z=t.z),
+   (t.rx||0===t.rx)&&(n.rx=t.rx),
+   (t.ry||0===t.ry)&&(n.ry=t.ry),
+   (t.rz||0===t.rz)&&(n.rz=t.rz),
+   C.options[t.n]=n,
+   r.style.transform=C.tr(n)
+ }
+},
+
+// CSS3D transform string
+tr: t => `translateX(-50%)translateY(-50%)translateX(${t.x}${C.unit})translateY(${t.y}${C.unit})translateZ(${t.z}${C.unit})rotateX(${t.rx}deg)rotateY(${t.ry}deg)rotateZ(${t.rz}deg)scaleX(${t.sx})scaleY(${t.sy})scaleZ(${t.sz})`
+
+}</code></pre>
 </div>
 
 <div id=viewport>
